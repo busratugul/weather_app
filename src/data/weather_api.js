@@ -1,17 +1,15 @@
+import axios from 'axios'
 const API_KEY = '8d077bc643df3cb0e4a1fed9c25edcdd'
 
 //bu fonksiyon city parametresi alıcak, aldığı citye göre arama yapıp veriyi return eder
 
-//e.keyCode = 13 entera eşittir
-
 export default async function gettingCityWeather(searchedCity) {
   try {
-    await fetch(
+    const res = await axios.get(
       `https://api.openweathermap.org/data/2.5/weather?q=${searchedCity}&appid=${API_KEY}&units=metric&lang=tr`
     )
-      .then((res) => res.json())
-      .then((data) => console.log(data))
-    console.log(searchedCity)
+    console.log(res.data)
+    return res.data
   } catch (error) {
     return console.log('Hata Oluştu:' + error.message)
   }

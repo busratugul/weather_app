@@ -3,12 +3,9 @@ import gettingCityWeather from '../data/weather_api'
 import WeatherContext from '../context/WeatherContext'
 
 function CityWeather() {
+    //contexten gerekli proplar alındı
   const { searchedCity, setSearchedCity, handleSubmit } =
     useContext(WeatherContext)
-
-  useEffect(() => {
-    gettingCityWeather('London')
-  }, [])
 
   return (
     <main>
