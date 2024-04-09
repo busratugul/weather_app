@@ -1,5 +1,6 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext} from 'react'
 import WeatherContext from '../context/WeatherContext'
+import getUVIndex from '../data/uvindex_api'
 
 function CityWeather() {
   //contexten gerekli proplar alındı

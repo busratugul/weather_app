@@ -8,7 +8,6 @@ export const WeatherProvider = ({ children }) => {
   const [searchedCity, setSearchedCity] = useState('')
   const [cityWeather, setCityWeather] = useState(null)
   const [error, setError] = useState('')
-
   //FUNCTIONS
   //Şehir arama fonksiyonu
   const handleSubmit = async (e) => {
@@ -23,6 +22,7 @@ export const WeatherProvider = ({ children }) => {
       setError('')
     }
   }
+
   //context propları
   const initialStates = {
     searchedCity,
@@ -31,7 +31,6 @@ export const WeatherProvider = ({ children }) => {
     cityWeather,
     error,
   }
-
   return (
     <WeatherContext.Provider value={initialStates}>
       {children}

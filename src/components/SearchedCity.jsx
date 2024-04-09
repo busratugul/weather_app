@@ -1,8 +1,15 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import WeatherContext from '../context/WeatherContext'
+import getUVIndex from '../data/uvindex_api'
 
 function Weather() {
   const { cityWeather } = useContext(WeatherContext)
+  /* 
+APININ UV INDEKS VERİLERİ DEPRECATED OLMUŞ
+  useEffect(() => {
+    cityWeather && getUVIndex(cityWeather?.coord.lat, cityWeather?.coord.lon)
+  }, [cityWeather]) */
+
   if (cityWeather) {
     return (
       <section>
@@ -21,6 +28,7 @@ function Weather() {
           </p>
           <p>Nem Oranı: {cityWeather?.main?.humidity} %</p>
           <p>Rüzgar Hızı: {Math.round(cityWeather?.wind?.speed)} km/h </p>
+          {/* <p>UV Indexi: {cityWeather}</p> */}
         </article>
       </section>
     )
