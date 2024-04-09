@@ -1,9 +1,8 @@
 import React, { useContext, useEffect } from 'react'
 import WeatherContext from '../context/WeatherContext'
-import getUVIndex from '../data/uvindex_api'
 
 function Weather() {
-  const { cityWeather } = useContext(WeatherContext)
+  const { cityWeather, getCurrentDate } = useContext(WeatherContext)
   if (cityWeather) {
     return (
       <section>
@@ -15,6 +14,7 @@ function Weather() {
         <article>
           <div>icon gelicek</div>
           <h1>{Math.round(cityWeather?.main?.temp)} °C</h1>
+          <p>{getCurrentDate()}</p>
         </article>
         <article>
           <p>

@@ -8,6 +8,7 @@ export const WeatherProvider = ({ children }) => {
   const [searchedCity, setSearchedCity] = useState('')
   const [cityWeather, setCityWeather] = useState(null)
   const [error, setError] = useState('')
+
   //FUNCTIONS
   //Şehir arama fonksiyonu
   const handleSubmit = async (e) => {
@@ -23,6 +24,16 @@ export const WeatherProvider = ({ children }) => {
     }
   }
 
+  //
+  function getCurrentDate() {
+    return new Date().toLocaleDateString('tr-TR', {
+      weekday: 'long',
+      month: 'long',
+      day: 'numeric',
+      year: 'numeric',
+    })
+  }
+
   //context propları
   const initialStates = {
     searchedCity,
@@ -30,6 +41,7 @@ export const WeatherProvider = ({ children }) => {
     handleSubmit,
     cityWeather,
     error,
+    getCurrentDate,
   }
   return (
     <WeatherContext.Provider value={initialStates}>
