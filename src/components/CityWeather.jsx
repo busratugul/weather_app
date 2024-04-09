@@ -1,10 +1,9 @@
 import React, { useContext, useEffect } from 'react'
-import gettingCityWeather from '../data/weather_api'
 import WeatherContext from '../context/WeatherContext'
 
 function CityWeather() {
-    //contexten gerekli proplar alındı
-  const { searchedCity, setSearchedCity, handleSubmit } =
+  //contexten gerekli proplar alındı
+  const { searchedCity, setSearchedCity, handleSubmit, error } =
     useContext(WeatherContext)
 
   return (
@@ -22,6 +21,11 @@ function CityWeather() {
             value={searchedCity}
             onChange={(e) => setSearchedCity(e.target.value)}
           />
+          {error !== '' && (
+            <div>
+              <p>{error}</p>
+            </div>
+          )}
         </form>
       </section>
     </main>

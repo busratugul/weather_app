@@ -11,7 +11,7 @@ export default async function gettingCityWeather(searchedCity) {
     console.log(res.data)
     return res.data
   } catch (error) {
-    return console.log('Hata Oluştu:' + error.message)
+    return { error: 'Lütfen Geçerli Bir Şehir Giriniz!!' }
   }
 }
 

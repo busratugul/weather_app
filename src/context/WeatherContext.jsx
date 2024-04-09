@@ -6,20 +6,30 @@ export const WeatherContext = createContext()
 export const WeatherProvider = ({ children }) => {
   //STATES
   const [searchedCity, setSearchedCity] = useState('')
+  const [cityWeather, setCityWeather] = useState(null)
+  const [error, setError] = useState('')
 
   //FUNCTIONS
   //Şehir arama fonksiyonu
-  function handleSubmit(e) {
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    gettingCityWeather(searchedCity)
-    setSearchedCity('')
+    const weatherData = await gettingCityWeather(searchedCity)
+    if (weatherData.error) {
+      setError(weatherData.error)
+      setCityWeather(null)
+    } else {
+      setCityWeather(weatherData)
+      setSearchedCity('')
+      setError('')
+    }
   }
-
   //context propları
   const initialStates = {
     searchedCity,
     setSearchedCity,
     handleSubmit,
+    cityWeather,
+    error,
   }
 
   return (
