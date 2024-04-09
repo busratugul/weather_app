@@ -1,6 +1,7 @@
 import axios from 'axios'
 const API_KEY = '8d077bc643df3cb0e4a1fed9c25edcdd'
 
+
 //bu fonksiyon city parametresi alıcak, aldığı citye göre arama yapıp veriyi return eder
 
 export default async function gettingCityWeather(searchedCity) {

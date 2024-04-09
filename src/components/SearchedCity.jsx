@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext } from 'react'
 import WeatherContext from '../context/WeatherContext'
 
 function Weather() {
@@ -12,7 +12,12 @@ function Weather() {
         <p>tarih ve saat gelicek</p>
         <p>{cityWeather?.weather[0]?.description}</p>
         <article>
-          <div>icon gelicek</div>
+          <div>
+            <img
+              src={`https://openweathermap.org/img/wn/${cityWeather.weather[0].icon}@4x.png`}
+              alt="weather icons"
+            />
+          </div>
           <h1>{Math.round(cityWeather?.main?.temp)} °C</h1>
           <p>{getCurrentDate()}</p>
         </article>

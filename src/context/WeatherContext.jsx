@@ -4,13 +4,13 @@ import gettingCityWeather from '../data/weather_api'
 export const WeatherContext = createContext()
 
 export const WeatherProvider = ({ children }) => {
-  //STATES
+ /* ----------------STATES-------------------*/
   const [searchedCity, setSearchedCity] = useState('')
   const [cityWeather, setCityWeather] = useState(null)
   const [error, setError] = useState('')
 
-  //FUNCTIONS
-  //Şehir arama fonksiyonu
+/* -------------- FUNCTIONS  -----------------*/
+  //ŞEHİR ARA
   const handleSubmit = async (e) => {
     e.preventDefault()
     const weatherData = await gettingCityWeather(searchedCity)
@@ -24,7 +24,7 @@ export const WeatherProvider = ({ children }) => {
     }
   }
 
-  //
+  //DATE AYARLA
   function getCurrentDate() {
     return new Date().toLocaleDateString('tr-TR', {
       weekday: 'long',
@@ -34,7 +34,7 @@ export const WeatherProvider = ({ children }) => {
     })
   }
 
-  //context propları
+  /* ---------------- PROPS ----------------- */
   const initialStates = {
     searchedCity,
     setSearchedCity,
@@ -43,6 +43,7 @@ export const WeatherProvider = ({ children }) => {
     error,
     getCurrentDate,
   }
+  
   return (
     <WeatherContext.Provider value={initialStates}>
       {children}
