@@ -18,5 +18,5 @@ html {
 }
 
 .rotate {
-  animation: rotate360 3s linear infinite;
+  animation: rotate360 6s linear infinite;
 }

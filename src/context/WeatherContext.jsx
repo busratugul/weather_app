@@ -16,15 +16,20 @@ export const WeatherProvider = ({ children }) => {
   const handleSubmit = async (e) => {
     e.preventDefault()
     const weatherData = await gettingCityWeather(searchedCity)
-    if (weatherData.error) {
-      setError(weatherData.error)
-      setLoading(true)
-      setCityWeather(null)
+    if (searchedCity === '') {
+      setError('Lütfen Geçerli Bir Şehir İsmi Giriniz')
     } else {
-      setCityWeather(weatherData)
-      setLoading(false)
-      setSearchedCity('')
-      setError('')
+      if (weatherData.error) {
+        setError(weatherData.error)
+        setLoading(true)
+        setSearchedCity('')
+        setCityWeather(null)
+      } else {
+        setCityWeather(weatherData)
+        setLoading(false)
+        setSearchedCity('')
+        setError('')
+      }
     }
   }
 
@@ -48,7 +53,7 @@ export const WeatherProvider = ({ children }) => {
     error,
     getCurrentDate,
     loading,
-    sunSVG
+    sunSVG,
   }
 
   return (

@@ -17,9 +17,9 @@ function App() {
           </span>
         </h1>
       </nav>
-      <article className="flex">
-        <Weather />
+      <article>
         <CityWeather />
+        <Weather />
       </article>
     </main>
   )
