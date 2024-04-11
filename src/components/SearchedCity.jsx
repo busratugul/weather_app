@@ -1,9 +1,10 @@
 import React, { useContext, useEffect } from 'react'
 import WeatherContext from '../context/WeatherContext'
 import gettingCityWeather from '../data/weather_api'
+import Loading from './Loading'
 
 function Weather() {
-  const { cityWeather, getCurrentDate, setCityWeather } =
+  const { cityWeather, getCurrentDate, setCityWeather, error, loading } =
     useContext(WeatherContext)
 
   useEffect(() => {
@@ -13,15 +14,18 @@ function Weather() {
     })()
   }, [])
 
-  if (cityWeather) {
+  //aranan şehir geçerli ise ve error yoksa
+  if (cityWeather && error === '') {
     return (
       <section className="w-3/5 border border-slate-800 text-center py-4 grid gap-2">
         <h1 className="text-7xl">
-          {cityWeather?.city?.name} ,{' '}
+          {cityWeather?.city?.name} ,
           <small className="text-base"> {cityWeather?.city?.country}</small>
         </h1>
         <p className="text-base text-slate-400">{getCurrentDate()}</p>
-        <p className="capitalize">{cityWeather?.list[0].weather[0]?.description}</p>
+        <p className="capitalize">
+          {cityWeather?.list[0].weather[0]?.description}
+        </p>
         <article>
           <div className="w-full">
             <img
@@ -30,19 +34,34 @@ function Weather() {
               alt="weather icons"
             />
           </div>
-          <h1 className="text-4xl">{Math.round(cityWeather?.list[0]?.main?.temp)} °C</h1>
+          <h1 className="text-4xl">
+            {Math.round(cityWeather?.list[0]?.main?.temp)} °C
+          </h1>
         </article>
-        <article className='grid gap-2 mt-3'>
+        <article className="grid gap-2 mt-3">
           <p>
-            Hissedilen Sıcaklık: {Math.round(cityWeather?.list[0]?.main?.feels_like)} °C
+            Hissedilen Sıcaklık:
+            {Math.round(cityWeather?.list[0]?.main?.feels_like)} °C
           </p>
           <p>Nem Oranı: {cityWeather?.list[0]?.main?.humidity} %</p>
-          <p>Rüzgar Hızı: {Math.round(cityWeather?.list[0]?.wind?.speed)} km/h </p>
+          <p>
+            Rüzgar Hızı: {Math.round(cityWeather?.list[0]?.wind?.speed)} km/h
+          </p>
           <p>
             <span>Y: {Math.round(cityWeather?.list[0]?.main?.temp_max)}</span>
             <span>D: {Math.round(cityWeather?.list[0]?.main?.temp_min)}</span>
           </p>
         </article>
+      </section>
+    )
+  }
+  //eğer hata mesajı varsa
+  if (error !== '' && loading) {
+    return (
+      <section className="w-3/5 border rounded border-slate-800 text-center py-10 grid gap-2 min-h-96">
+        <div className='min-h-96'>
+          <Loading />
+        </div>
       </section>
     )
   }

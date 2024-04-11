@@ -1,5 +1,6 @@
 import React, { createContext, useState } from 'react'
 import gettingCityWeather from '../data/weather_api'
+import sunSVG from '../assets/clear.png'
 
 export const WeatherContext = createContext()
 
@@ -8,6 +9,7 @@ export const WeatherProvider = ({ children }) => {
   const [searchedCity, setSearchedCity] = useState('')
   const [cityWeather, setCityWeather] = useState(null)
   const [error, setError] = useState('')
+  const [loading, setLoading] = useState(false)
 
   /* -------------- FUNCTIONS  -----------------*/
   //ŞEHİR ARA
@@ -16,9 +18,11 @@ export const WeatherProvider = ({ children }) => {
     const weatherData = await gettingCityWeather(searchedCity)
     if (weatherData.error) {
       setError(weatherData.error)
+      setLoading(true)
       setCityWeather(null)
     } else {
       setCityWeather(weatherData)
+      setLoading(false)
       setSearchedCity('')
       setError('')
     }
@@ -43,6 +47,8 @@ export const WeatherProvider = ({ children }) => {
     setCityWeather,
     error,
     getCurrentDate,
+    loading,
+    sunSVG
   }
 
   return (

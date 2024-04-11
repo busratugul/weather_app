@@ -8,7 +8,7 @@ function CityWeather() {
   return (
     <section className="h-100 grid w-2/5 place-items-start pt-4">
       <article className="flex flex-col items-center gap-2 mx-auto">
-        <h3>Welcome To iWeather</h3>
+        <h3>iWeather'a Hoşgeldiniz</h3>
         <p className="text-sm text-slate-400">
           Hava durumu bilgisi için bir şehir girin.
         </p>
