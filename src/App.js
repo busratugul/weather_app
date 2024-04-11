@@ -2,6 +2,7 @@ import { useContext } from 'react'
 import CityWeather from './components/CityWeather'
 import Weather from './components/SearchedCity'
 import WeatherContext from './context/WeatherContext'
+import DailyWeatherDetail from './components/DailyWeatherDetail'
 
 function App() {
   const { sunSVG } = useContext(WeatherContext)
@@ -20,6 +21,7 @@ function App() {
       <article>
         <CityWeather />
         <Weather />
+        <DailyWeatherDetail/>
       </article>
     </main>
   )

@@ -11,6 +11,21 @@ export const WeatherProvider = ({ children }) => {
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
 
+  const monthsList = [
+    'Ocak',
+    'Şubat',
+    'Mart',
+    'Nisan',
+    'Mayıs',
+    'Haziran',
+    'Temmuz',
+    'Ağustos',
+    'Eylül',
+    'Ekim',
+    'Kasım',
+    'Aralık',
+  ]
+
   /* -------------- FUNCTIONS  -----------------*/
   //ŞEHİR ARA
   const handleSubmit = async (e) => {
@@ -54,6 +69,7 @@ export const WeatherProvider = ({ children }) => {
     getCurrentDate,
     loading,
     sunSVG,
+    monthsList
   }
 
   return (
