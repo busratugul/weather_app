@@ -17,27 +17,31 @@ function Weather() {
     return (
       <section className="w-3/5 border border-slate-800 text-center py-4 grid gap-2">
         <h1 className="text-7xl">
-          {cityWeather?.name} ,{' '}
-          <small className="text-base"> {cityWeather?.sys?.country}</small>
+          {cityWeather?.city?.name} ,{' '}
+          <small className="text-base"> {cityWeather?.city?.country}</small>
         </h1>
         <p className="text-base text-slate-400">{getCurrentDate()}</p>
-        <p className="capitalize">{cityWeather?.weather[0]?.description}</p>
+        <p className="capitalize">{cityWeather?.list[0].weather[0]?.description}</p>
         <article>
           <div className="w-full">
             <img
               className="mx-auto"
-              src={`https://openweathermap.org/img/wn/${cityWeather?.weather[0].icon}@4x.png`}
+              src={`https://openweathermap.org/img/wn/${cityWeather?.list[0]?.weather[0].icon}@4x.png`}
               alt="weather icons"
             />
           </div>
-          <h1 className="text-4xl">{Math.round(cityWeather?.main?.temp)} °C</h1>
+          <h1 className="text-4xl">{Math.round(cityWeather?.list[0]?.main?.temp)} °C</h1>
         </article>
-        <article>
+        <article className='grid gap-2 mt-3'>
           <p>
-            Hissedilen Sıcaklık: {Math.round(cityWeather?.main?.feels_like)} °C
+            Hissedilen Sıcaklık: {Math.round(cityWeather?.list[0]?.main?.feels_like)} °C
           </p>
-          <p>Nem Oranı: {cityWeather?.main?.humidity} %</p>
-          <p>Rüzgar Hızı: {Math.round(cityWeather?.wind?.speed)} km/h </p>
+          <p>Nem Oranı: {cityWeather?.list[0]?.main?.humidity} %</p>
+          <p>Rüzgar Hızı: {Math.round(cityWeather?.list[0]?.wind?.speed)} km/h </p>
+          <p>
+            <span>Y: {Math.round(cityWeather?.list[0]?.main?.temp_max)}</span>
+            <span>D: {Math.round(cityWeather?.list[0]?.main?.temp_min)}</span>
+          </p>
         </article>
       </section>
     )
