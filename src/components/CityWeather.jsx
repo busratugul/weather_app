@@ -1,10 +1,16 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext, useEffect, useRef } from 'react'
 import WeatherContext from '../context/WeatherContext'
 
 function CityWeather() {
   //contexten gerekli proplar alındı
   const { searchedCity, setSearchedCity, handleSubmit, error } =
     useContext(WeatherContext)
+
+  const inputRef = useRef(null)
+  useEffect(() => {
+    inputRef.current.focus()
+  },[searchedCity])
+  
   return (
     <section className="h-100 grid w-full place-items-start">
       <article className="flex flex-col items-center mx-auto">
@@ -18,6 +24,7 @@ function CityWeather() {
             value={searchedCity}
             onChange={(e) => setSearchedCity(e.target.value)}
             className="w-full px-3 py-1 rounded placeholder:text-slate-400 bg-gray-700 border-none outline-none text-lg"
+            ref={inputRef}
           />
           {error !== '' && (
             <div>

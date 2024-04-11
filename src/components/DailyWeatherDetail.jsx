@@ -22,7 +22,7 @@ function DailyWeatherDetail() {
             {DailyWeatherDetail.map((day, idx) => (
               <div
                 key={idx}
-                className="border border-slate-800 text-center flex-shrink-0 w-27 mr-2 px-4 py-2 drop-shadow-xl bg-gray-700 rounded max-w-32"
+                className="border border-slate-800 text-center flex-shrink-0 w-27 mr-2 px-4 py-2 shadow-xl bg-gray-700 rounded max-w-32"
               >
                 <p className="text-sm">
                   <span className="mr-1">{day?.dt_txt.substring(8, 10)}</span>

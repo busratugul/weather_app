@@ -27,7 +27,7 @@ function SearchedCity() {
   //aranan şehir geçerli ise ve error yoksa
   if (cityWeather && error === '') {
     return (
-      <section className="w-full h-full border border-slate-800 text-center py-4 grid gap-2 mt-5 relative fade-in text-zinc-50 cursor-pointer">
+      <section className="w-full h-full text-center py-4 grid gap-2 mt-5 relative fade-in text-zinc-50 cursor-pointer">
         <div
           className="absolute bg-cover w-full h-full bg-center bg-no-repeat blur-sm -z-1 opacity-50"
           style={{ backgroundImage: `url(${bgImgURL})` }}

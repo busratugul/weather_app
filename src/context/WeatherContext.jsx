@@ -38,10 +38,6 @@ export const WeatherProvider = ({ children }) => {
 
     const weatherData = await gettingCityWeather(searchedCity)
 
-    const dataBgColor = bgColorIconNumber(
-      weatherData?.list[0]?.weather[0]?.icon
-    )
-
     if (searchedCity === '' || bgUrl === '') {
       setError('Lütfen Geçerli Bir Şehir İsmi Giriniz')
     } else {
@@ -52,6 +48,10 @@ export const WeatherProvider = ({ children }) => {
         setBgImgURL('')
         setCityWeather(null)
       } else {
+         
+      const dataBgColor = bgColorIconNumber(
+        weatherData?.list[0]?.weather[0]?.icon
+      )
         setCityWeather(weatherData)
         setBgImgURL(bgUrl)
         setBgColor(dataBgColor)
