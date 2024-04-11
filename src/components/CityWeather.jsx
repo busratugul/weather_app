@@ -7,8 +7,8 @@ function CityWeather() {
     useContext(WeatherContext)
   return (
     <section className="h-100 grid w-full place-items-start">
-      <article className="flex flex-col items-center gap-2 mx-auto">
-        <p className="text-sm text-slate-400">
+      <article className="flex flex-col items-center mx-auto">
+        <p className="text-sm text-slate-400 mb-2">
           Hava durumu bilgisi için bir şehir girin.
         </p>
         <form className="w-full" onSubmit={(e) => handleSubmit(e)}>

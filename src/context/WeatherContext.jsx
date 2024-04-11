@@ -1,6 +1,7 @@
 import React, { createContext, useState } from 'react'
 import gettingCityWeather from '../data/weather_api'
 import sunSVG from '../assets/clear.png'
+import gettingBackgroundImg from '../data/background_api'
 
 export const WeatherContext = createContext()
 
@@ -10,6 +11,7 @@ export const WeatherProvider = ({ children }) => {
   const [cityWeather, setCityWeather] = useState(null)
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
+  const [bgImgURL, setBgImgURL] = useState('')
 
   const monthsList = [
     'Ocak',
@@ -30,24 +32,28 @@ export const WeatherProvider = ({ children }) => {
   //ŞEHİR ARA
   const handleSubmit = async (e) => {
     e.preventDefault()
+    const bgUrl = await gettingBackgroundImg(searchedCity)
+    
     const weatherData = await gettingCityWeather(searchedCity)
-    if (searchedCity === '') {
+
+    if (searchedCity === '' || bgUrl === "") {
       setError('Lütfen Geçerli Bir Şehir İsmi Giriniz')
     } else {
       if (weatherData.error) {
         setError(weatherData.error)
         setLoading(true)
         setSearchedCity('')
+        setBgImgURL('')
         setCityWeather(null)
       } else {
         setCityWeather(weatherData)
+        setBgImgURL(bgUrl)
         setLoading(false)
         setSearchedCity('')
         setError('')
       }
     }
   }
-
   //DATE AYARLA
   function getCurrentDate() {
     return new Date().toLocaleDateString('tr-TR', {
@@ -69,7 +75,9 @@ export const WeatherProvider = ({ children }) => {
     getCurrentDate,
     loading,
     sunSVG,
-    monthsList
+    monthsList,
+    bgImgURL,
+    setBgImgURL,
   }
 
   return (

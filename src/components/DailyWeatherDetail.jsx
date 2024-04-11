@@ -14,15 +14,15 @@ function DailyWeatherDetail() {
   if (cityWeather) {
     return (
       <>
-        <h1 className="mt-2 mb-3 text-center text-slate-400 tracking-wider text-lg">
-           Hava Durumu Detayları
+        <h1 className="mt-2 mb-3 text-center text-slate-300 tracking-wider text-lg">
+          Hava Durumu Detayları
         </h1>
         <section className="w-full mt-3 overflow-x-auto gap-4">
           <div className="flex">
             {DailyWeatherDetail.map((day, idx) => (
               <div
                 key={idx}
-                className="border border-slate-800 text-center flex-shrink-0 w-27 mr-2 p-4 shadow-md bg-gray-700 rounded"
+                className="border border-slate-800 text-center flex-shrink-0 w-27 mr-2 p-4 shadow-md bg-gray-700 rounded max-w-32"
               >
                 <p className="text-sm">
                   <span className="mr-1">{day?.dt_txt.substring(8, 10)}</span>

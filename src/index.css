@@ -20,3 +20,17 @@ html {
 .rotate {
   animation: rotate360 6s linear infinite;
 }
+
+.fade-in {
+  opacity: 0;
+  animation: fadeIn 1s ease-in forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: .0;
+  }
+  to {
+    opacity: 1;
+  }
+}

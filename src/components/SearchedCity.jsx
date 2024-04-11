@@ -2,32 +2,43 @@ import React, { useContext, useEffect } from 'react'
 import WeatherContext from '../context/WeatherContext'
 import gettingCityWeather from '../data/weather_api'
 import Loading from './Loading'
+import gettingBackgroundImg from '../data/background_api'
+import DailyWeatherDetail from './DailyWeatherDetail'
 
-function Weather() {
-  const { cityWeather, getCurrentDate, setCityWeather, error, loading } =
-    useContext(WeatherContext)
+function SearchedCity() {
+  const {
+    cityWeather,
+    getCurrentDate,
+    setCityWeather,
+    error,
+    loading,
+    bgImgURL,
+    setBgImgURL,
+  } = useContext(WeatherContext)
 
   useEffect(() => {
     ;(async () => {
       const weatherData = await gettingCityWeather('İstanbul')
+      const bgUrl = await gettingBackgroundImg('İstanbul')
       setCityWeather(weatherData)
+      setBgImgURL(bgUrl)
     })()
   }, [])
 
   //aranan şehir geçerli ise ve error yoksa
   if (cityWeather && error === '') {
     return (
-      <section className="w-full border border-slate-800 text-center py-4 grid gap-2 mt-5">
+      <section className="w-full h-full border border-slate-800 text-center py-4 grid gap-2 mt-5 bgImage bg-cover z-50 relative fade-in text-zinc-50 cursor-pointer">
         <h1 className="text-5xl">
           {cityWeather?.city?.name} ,
           <small className="text-base"> {cityWeather?.city?.country}</small>
         </h1>
-        <p className="text-base text-slate-400">{getCurrentDate()}</p>
+        <p className="text-base text-slate-300">{getCurrentDate()}</p>
         <p className="capitalize">
           {cityWeather?.list[0].weather[0]?.description}
         </p>
         <article className="flex justify-evenly align-center">
-          <div className="grid place-content-center gap-2 text-sm text-left pt-7">
+          <div className="grid place-content-center gap-2 text-base text-left pt-7">
             <p>
               Hissedilen Sıcaklık:
               <span className="ms-1">
@@ -84,6 +95,13 @@ function Weather() {
             </h1>
           </div>
         </article>
+        <DailyWeatherDetail />
+        <div className="absolute -z-10 h-full">
+          <img
+            src={bgImgURL}
+            className="opacity-50 object-cover object-center blur-sm"
+          />
+        </div>
       </section>
     )
   }
@@ -97,4 +115,4 @@ function Weather() {
   }
 }
 
-export default Weather
+export default SearchedCity
