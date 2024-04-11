@@ -14,7 +14,7 @@ function DailyWeatherDetail() {
   if (cityWeather) {
     return (
       <>
-        <h1 className="mt-2 mb-3 text-center text-amber-300 tracking-wider text-lg">
+        <h1 className="mt-2 mb-3 text-center text-slate-400 tracking-wider text-lg">
            Hava Durumu Detayları
         </h1>
         <section className="w-full mt-3 overflow-x-auto gap-4">
