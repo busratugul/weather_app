@@ -1,25 +1,36 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import WeatherContext from '../context/WeatherContext'
+import gettingCityWeather from '../data/weather_api'
 
 function Weather() {
-  const { cityWeather, getCurrentDate } = useContext(WeatherContext)
+  const { cityWeather, getCurrentDate, setCityWeather } =
+    useContext(WeatherContext)
+
+  useEffect(() => {
+    ;(async () => {
+      const weatherData = await gettingCityWeather('İstanbul')
+      setCityWeather(weatherData)
+    })()
+  }, [])
+
   if (cityWeather) {
     return (
-      <section>
-        <h1>
-          {cityWeather?.name}, <small>{cityWeather?.sys?.country}</small>
+      <section className="w-3/5 border border-slate-800 text-center py-4 grid gap-2">
+        <h1 className="text-7xl">
+          {cityWeather?.name} ,{' '}
+          <small className="text-base"> {cityWeather?.sys?.country}</small>
         </h1>
-        <p>tarih ve saat gelicek</p>
-        <p>{cityWeather?.weather[0]?.description}</p>
+        <p className="text-base text-slate-400">{getCurrentDate()}</p>
+        <p className="capitalize">{cityWeather?.weather[0]?.description}</p>
         <article>
-          <div>
+          <div className="w-full">
             <img
-              src={`https://openweathermap.org/img/wn/${cityWeather.weather[0].icon}@4x.png`}
+              className="mx-auto"
+              src={`https://openweathermap.org/img/wn/${cityWeather?.weather[0].icon}@4x.png`}
               alt="weather icons"
             />
           </div>
-          <h1>{Math.round(cityWeather?.main?.temp)} °C</h1>
-          <p>{getCurrentDate()}</p>
+          <h1 className="text-4xl">{Math.round(cityWeather?.main?.temp)} °C</h1>
         </article>
         <article>
           <p>
@@ -32,4 +43,5 @@ function Weather() {
     )
   }
 }
+
 export default Weather

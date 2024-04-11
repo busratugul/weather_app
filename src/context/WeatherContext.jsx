@@ -4,12 +4,12 @@ import gettingCityWeather from '../data/weather_api'
 export const WeatherContext = createContext()
 
 export const WeatherProvider = ({ children }) => {
- /* ----------------STATES-------------------*/
+  /* ----------------STATES-------------------*/
   const [searchedCity, setSearchedCity] = useState('')
   const [cityWeather, setCityWeather] = useState(null)
   const [error, setError] = useState('')
 
-/* -------------- FUNCTIONS  -----------------*/
+  /* -------------- FUNCTIONS  -----------------*/
   //ŞEHİR ARA
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -40,10 +40,11 @@ export const WeatherProvider = ({ children }) => {
     setSearchedCity,
     handleSubmit,
     cityWeather,
+    setCityWeather,
     error,
     getCurrentDate,
   }
-  
+
   return (
     <WeatherContext.Provider value={initialStates}>
       {children}
