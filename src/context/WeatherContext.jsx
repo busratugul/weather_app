@@ -2,6 +2,7 @@ import React, { createContext, useState } from 'react'
 import gettingCityWeather from '../data/weather_api'
 import sunSVG from '../assets/clear.png'
 import gettingBackgroundImg from '../data/background_api'
+import bgColorIconNumber from '../data/background_color'
 
 export const WeatherContext = createContext()
 
@@ -12,6 +13,7 @@ export const WeatherProvider = ({ children }) => {
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
   const [bgImgURL, setBgImgURL] = useState('')
+  const [bgColor, setBgColor] = useState("bg-slate-800")
 
   const monthsList = [
     'Ocak',
@@ -33,10 +35,14 @@ export const WeatherProvider = ({ children }) => {
   const handleSubmit = async (e) => {
     e.preventDefault()
     const bgUrl = await gettingBackgroundImg(searchedCity)
-    
+
     const weatherData = await gettingCityWeather(searchedCity)
 
-    if (searchedCity === '' || bgUrl === "") {
+    const dataBgColor = bgColorIconNumber(
+      weatherData?.list[0]?.weather[0]?.icon
+    )
+
+    if (searchedCity === '' || bgUrl === '') {
       setError('Lütfen Geçerli Bir Şehir İsmi Giriniz')
     } else {
       if (weatherData.error) {
@@ -48,6 +54,7 @@ export const WeatherProvider = ({ children }) => {
       } else {
         setCityWeather(weatherData)
         setBgImgURL(bgUrl)
+        setBgColor(dataBgColor)
         setLoading(false)
         setSearchedCity('')
         setError('')
@@ -78,6 +85,8 @@ export const WeatherProvider = ({ children }) => {
     monthsList,
     bgImgURL,
     setBgImgURL,
+    bgColor,
+    setBgColor
   }
 
   return (
