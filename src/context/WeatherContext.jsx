@@ -13,7 +13,7 @@ export const WeatherProvider = ({ children }) => {
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
   const [bgImgURL, setBgImgURL] = useState('')
-  const [bgColor, setBgColor] = useState("bg-slate-800")
+  const [bgColor, setBgColor] = useState('bg-slate-800')
 
   const monthsList = [
     'Ocak',
@@ -34,6 +34,7 @@ export const WeatherProvider = ({ children }) => {
   //ŞEHİR ARA
   const handleSubmit = async (e) => {
     e.preventDefault()
+    setBgImgURL('')
     const bgUrl = await gettingBackgroundImg(searchedCity)
 
     const weatherData = await gettingCityWeather(searchedCity)
@@ -48,13 +49,13 @@ export const WeatherProvider = ({ children }) => {
         setBgImgURL('')
         setCityWeather(null)
       } else {
-         
-      const dataBgColor = bgColorIconNumber(
-        weatherData?.list[0]?.weather[0]?.icon
-      )
+        
+        const dataBgColor = bgColorIconNumber(
+          weatherData?.list[0]?.weather[0]?.icon
+        )
         setCityWeather(weatherData)
-        setBgImgURL(bgUrl)
         setBgColor(dataBgColor)
+        setBgImgURL(bgUrl)
         setLoading(false)
         setSearchedCity('')
         setError('')
@@ -86,7 +87,7 @@ export const WeatherProvider = ({ children }) => {
     bgImgURL,
     setBgImgURL,
     bgColor,
-    setBgColor
+    setBgColor,
   }
 
   return (

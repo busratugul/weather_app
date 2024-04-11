@@ -30,7 +30,7 @@ function SearchedCity() {
       <section className="w-full h-full text-center py-4 grid gap-2 mt-5 relative fade-in text-zinc-50 cursor-pointer">
         <div
           className="absolute bg-cover w-full h-full bg-center bg-no-repeat blur-sm -z-1 opacity-50"
-          style={{ backgroundImage: `url(${bgImgURL})` }}
+          style={{ backgroundImage: bgImgURL ? `url(${bgImgURL})` : 'none' }}
         ></div>
         <div className="z-50">
           <h1 className="text-5xl font-bold">
