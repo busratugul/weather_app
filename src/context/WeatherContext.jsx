@@ -14,6 +14,7 @@ export const WeatherProvider = ({ children }) => {
   const [loading, setLoading] = useState(false)
   const [bgImgURL, setBgImgURL] = useState('')
   const [bgColor, setBgColor] = useState('bg-slate-800')
+  const [location, setLocation] = useState(null)
 
   const monthsList = [
     'Ocak',
@@ -71,7 +72,15 @@ export const WeatherProvider = ({ children }) => {
       year: 'numeric',
     })
   }
-
+  //KONUM AL
+  function getLocation(){
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        const { latitude, longitude } = position.coords;
+        setLocation({ latitude, longitude });
+        console.log({ latitude, longitude });
+  })}
+  
   /* ---------------- PROPS ----------------- */
   const initialStates = {
     searchedCity,
@@ -88,6 +97,7 @@ export const WeatherProvider = ({ children }) => {
     setBgImgURL,
     bgColor,
     setBgColor,
+    getLocation
   }
 
   return (

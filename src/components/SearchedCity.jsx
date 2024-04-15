@@ -13,14 +13,21 @@ function SearchedCity() {
     loading,
     bgImgURL,
     setBgImgURL,
+    getLocation
   } = useContext(WeatherContext)
 
   useEffect(() => {
     (async () => {
-      const weatherData = await gettingCityWeather('İstanbul')
-      const bgUrl = await gettingBackgroundImg('İstanbul')
-      setCityWeather(weatherData)
-      setBgImgURL(bgUrl)
+      const permission = window.confirm('Konumunuzu paylaşmak ister misiniz?')
+      if (permission) {
+        console.log('Konuma izin verildi')
+        getLocation()
+      } else {
+        const weatherData = await gettingCityWeather('İstanbul')
+        const bgUrl = await gettingBackgroundImg('İstanbul')
+        setCityWeather(weatherData)
+        setBgImgURL(bgUrl)
+      }
     })()
   }, [])
 
