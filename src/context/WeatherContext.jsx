@@ -80,9 +80,15 @@ export const WeatherProvider = ({ children }) => {
     if (permission) {
       navigator.geolocation.getCurrentPosition(
         async (position) => {
-          const { latitude, longitude } = position.coords
-          const weatherData = await getLocationCity({ latitude, longitude })
+          let { latitude, longitude } = position.coords
+          let weatherData = await getLocationCity({ latitude, longitude })
           setCityWeather(weatherData)
+          let bgUrl = await gettingBackgroundImg(weatherData)
+          let dataBgColor = bgColorIconNumber(
+            weatherData?.list[0]?.weather[0]?.icon
+          )
+          setBgColor(dataBgColor)
+          setBgImgURL(bgUrl)
           setLoading(false)
           //console.log(weatherData);
         },
