@@ -9,7 +9,7 @@ export default async function gettingBackgroundImg(searchedCity) {
       `https://api.unsplash.com/search/photos?query=${searchedCity}&client_id=${API_KEY}&q=70`
     )
     const { small } = res.data.results[7].urls
-    console.log(res.data)
+    //console.log(res.data)
     return small
   } catch (error) {
     return { error: 'Aranan şehire ait bir fotoğraf bulunamadı' }

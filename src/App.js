@@ -3,10 +3,11 @@ import CityWeather from './components/CityWeather'
 import SearchedCity from './components/SearchedCity'
 import WeatherContext from './context/WeatherContext'
 import DailyWeatherDetail from './components/DailyWeatherDetail'
+import Alert from './components/Alert'
 
 function App() {
-  const { sunSVG, bgColor } = useContext(WeatherContext)
-
+  const { sunSVG, bgColor, permission } = useContext(WeatherContext)
+  
   return (
     <main
       className={`h-lvh w-full  text-zinc-50 py-4 font-lato overflow-y-hidden ${bgColor}`}
@@ -19,6 +20,7 @@ function App() {
             </span>
           </span>
         </h1>
+        {!permission && <Alert/>}
       </nav>
       <article>
         <CityWeather />

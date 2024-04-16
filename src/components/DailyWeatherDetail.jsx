@@ -1,17 +1,17 @@
-import React, { useContext, useEffect, useMemo } from 'react'
+import { useContext,useMemo } from 'react'
 import WeatherContext from '../context/WeatherContext'
 
 function DailyWeatherDetail() {
-  const { cityWeather, monthsList } = useContext(WeatherContext)
+  const { cityWeather, monthsList, loading } = useContext(WeatherContext)
 
   const DailyWeatherDetail = useMemo(() => {
     if (cityWeather?.list) {
-      console.log('Veri Detayları kaydedildi')
+      //console.log('Veri Detayları kaydedildi')
       return cityWeather.list.slice(1, 15)
     }
   }, [cityWeather])
 
-  if (cityWeather) {
+  if (cityWeather && cityWeather.list && !loading) 
     return (
       <>
         <h1 className="mt-2 mb-3 text-center text-slate-300 tracking-wider text-lg">
@@ -37,7 +37,6 @@ function DailyWeatherDetail() {
                 />
                 <p>{Math.round(day?.main?.temp)} °C </p>
                 <p className="capitalize text-sm">{day?.weather[0].description}</p>
-                
               </div>
             ))}
           </div>
@@ -45,6 +44,6 @@ function DailyWeatherDetail() {
       </>
     )
   }
-}
+
 
 export default DailyWeatherDetail

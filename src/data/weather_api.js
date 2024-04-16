@@ -1,5 +1,5 @@
 import axios from 'axios'
-const API_KEY = '8d077bc643df3cb0e4a1fed9c25edcdd'
+import { API_KEY } from '../context/WeatherContext'
 
 //bu fonksiyon city parametresi alıcak, aldığı citye göre arama yapıp veriyi return eder
 

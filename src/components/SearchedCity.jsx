@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react'
+import { useContext, useEffect } from 'react'
 import WeatherContext from '../context/WeatherContext'
 import gettingCityWeather from '../data/weather_api'
 import Loading from './Loading'
@@ -13,26 +13,30 @@ function SearchedCity() {
     loading,
     bgImgURL,
     setBgImgURL,
-    getLocation
+    getLocation,
+    permission,
+    setLoading,
   } = useContext(WeatherContext)
 
   useEffect(() => {
     (async () => {
-      const permission = window.confirm('Konumunuzu paylaşmak ister misiniz?')
       if (permission) {
-        console.log('Konuma izin verildi')
-        getLocation()
-      } else {
+        //console.log('konuma izin verildi')
+        return await getLocation()
+      }
+      if (!permission) {
         const weatherData = await gettingCityWeather('İstanbul')
         const bgUrl = await gettingBackgroundImg('İstanbul')
         setCityWeather(weatherData)
         setBgImgURL(bgUrl)
+        setLoading(false)
+        //console.log('konuma izin verilmedi')
       }
     })()
-  }, [])
+  }, [permission])
 
   //aranan şehir geçerli ise ve error yoksa
-  if (cityWeather && error === '') {
+  if (cityWeather && !error && !loading) {
     return (
       <section className="w-full h-full text-center py-4 grid gap-2 mt-5 relative fade-in text-zinc-50 cursor-pointer">
         <div
@@ -46,7 +50,7 @@ function SearchedCity() {
           </h1>
           <p className="text-base text-slate-300">{getCurrentDate()}</p>
           <p className="capitalize mt-3 font-semibold">
-            {cityWeather?.list[0].weather[0]?.description}
+            {cityWeather.list && cityWeather?.list[0].weather[0]?.description}
           </p>
           <article className="flex justify-evenly align-center font-medium">
             <div className="grid place-content-center gap-2 text-base text-left pt-7">
@@ -111,7 +115,7 @@ function SearchedCity() {
     )
   }
   //eğer hata mesajı varsa
-  if (error !== '' && loading) {
+  if (error || loading) {
     return (
       <section className="w-full border rounded border-slate-800 text-center py-10 grid gap-2 min-h-96 mt-5">
         <Loading />

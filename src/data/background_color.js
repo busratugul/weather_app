@@ -1,4 +1,4 @@
-/* Bu fonksyion weather iconunun numeric değerine göre tüm app backgroundunun rengini optimize eder  */
+/* Bu fonksiyon weather iconunun numeric değerine göre tüm app backgroundun rengini optimize eder  */
 
 export default function bgColorIconNumber(icon) {
   let color
