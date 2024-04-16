@@ -3,7 +3,7 @@ import WeatherContext from '../context/WeatherContext'
 
 function CityWeather() {
   //contexten gerekli proplar alındı
-  const { searchedCity, setSearchedCity, handleSubmit, error } =
+  const { searchedCity, setSearchedCity, handleSubmit, error, txtColor } =
     useContext(WeatherContext)
 
   const inputRef = useRef(null)
@@ -14,7 +14,7 @@ function CityWeather() {
   return (
     <section className="h-100 grid w-full place-items-start">
       <article className="flex flex-col items-center mx-auto">
-        <p className="text-sm text-slate-400 mb-2">
+        <p className={`text-sm mb-2 ${txtColor ?txtColor :"text-slate-300"}`}>
           Hava durumu bilgisi için bir şehir girin.
         </p>
         <form className="w-full" onSubmit={(e) => handleSubmit(e)}>

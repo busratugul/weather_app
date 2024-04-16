@@ -2,7 +2,7 @@ import { useContext,useMemo } from 'react'
 import WeatherContext from '../context/WeatherContext'
 
 function DailyWeatherDetail() {
-  const { cityWeather, monthsList, loading } = useContext(WeatherContext)
+  const { cityWeather, monthsList, loading, txtColor } = useContext(WeatherContext)
 
   const DailyWeatherDetail = useMemo(() => {
     if (cityWeather?.list) {
@@ -14,7 +14,7 @@ function DailyWeatherDetail() {
   if (cityWeather && cityWeather.list && !loading) 
     return (
       <>
-        <h1 className="mt-2 mb-3 text-center text-slate-300 tracking-wider text-lg">
+        <h1 className={`mt-2 mb-3 text-center tracking-wider text-lg ${txtColor ?txtColor :"text-slate-300"}`}>
           Hava Durumu Detayları
         </h1>
         <section className="w-full mt-3 overflow-x-auto gap-4">

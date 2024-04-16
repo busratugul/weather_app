@@ -1,0 +1,12 @@
+//BU FONKSİYON OLUŞTURULAN BACKGROUND TEMALARINA GÖRE TEXT COLOR ATAMASI YAPAR
+export default function setTextColor(icon) {
+    let text_color
+    if(icon === "01d"){
+      text_color = "text-gray-700"
+    }
+    else if(icon === "02d"){
+      text_color = "text-slate-100" 
+    }
+    console.log(text_color);
+    return text_color
+  }

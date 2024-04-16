@@ -4,6 +4,7 @@ import sunSVG from '../assets/clear.png'
 import gettingBackgroundImg from '../data/background_api'
 import bgColorIconNumber from '../data/background_color'
 import getLocationCity from '../data/location_api'
+import setTextColor from '../data/textcolor_api'
 
 export const WeatherContext = createContext()
 
@@ -14,8 +15,10 @@ export const WeatherProvider = ({ children }) => {
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(true)
   const [bgImgURL, setBgImgURL] = useState('')
+  const [txtColor, setTxtColor] = useState("")
   const [bgColor, setBgColor] = useState('bg-slate-800')
   const [permission, setPermission] = useState(false)
+  
 
   const monthsList = [
     'Ocak',
@@ -38,7 +41,6 @@ export const WeatherProvider = ({ children }) => {
     e.preventDefault()
     setBgImgURL('')
     let bgUrl = await gettingBackgroundImg(searchedCity)
-
     let weatherData = await gettingCityWeather(searchedCity)
 
     if (searchedCity === '' || bgUrl === '') {
@@ -55,8 +57,10 @@ export const WeatherProvider = ({ children }) => {
         let dataBgColor = bgColorIconNumber(
           weatherData?.list[0]?.weather[0]?.icon
         )
+        let color = setTextColor(weatherData?.list[0]?.weather[0]?.icon)
         setCityWeather(weatherData)
         setBgColor(dataBgColor)
+        setTextColor(color)
         setBgImgURL(bgUrl)
         setSearchedCity('')
         setError('')
@@ -83,11 +87,16 @@ export const WeatherProvider = ({ children }) => {
           let { latitude, longitude } = position.coords
           let weatherData = await getLocationCity({ latitude, longitude })
           setCityWeather(weatherData)
+
           let bgUrl = await gettingBackgroundImg(weatherData)
+
           let dataBgColor = bgColorIconNumber(
             weatherData?.list[0]?.weather[0]?.icon
           )
+          let color = setTextColor(weatherData?.list[0]?.weather[0]?.icon)
+
           setBgColor(dataBgColor)
+          setTxtColor(color)
           setBgImgURL(bgUrl)
           setLoading(false)
           //console.log(weatherData);
@@ -121,6 +130,7 @@ export const WeatherProvider = ({ children }) => {
     location,
     permission,
     setPermission,
+    txtColor
   }
 
   return (
