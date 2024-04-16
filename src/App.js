@@ -10,7 +10,7 @@ function App() {
   
   return (
     <main
-      className={`h-lvh w-full  text-zinc-50 py-4 font-lato overflow-y-hidden ${bgColor}`}
+      className={`h-lvh w-full  text-zinc-50 py-4 font-poppins overflow-y-hidden ${bgColor}`}
     >
       <nav className="w-full h-20 mt-3">
         <h1 className="text-center text-2xl text-blue-600 tracking-wider">

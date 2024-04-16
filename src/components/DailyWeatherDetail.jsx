@@ -6,12 +6,13 @@ function DailyWeatherDetail() {
 
   const DailyWeatherDetail = useMemo(() => {
     if (cityWeather?.list) {
-      //console.log('Veri Detayları kaydedildi')
+      //console.log('veri detayları kaydedildi')
       return cityWeather.list.slice(1, 15)
     }
   }, [cityWeather])
 
-  if (cityWeather && cityWeather.list && !loading) 
+  //Gerekli veriler alındıktan sonra detaylandır
+  if (cityWeather && !loading) 
     return (
       <>
         <h1 className={`mt-2 mb-3 text-center tracking-wider text-lg ${txtColor ?txtColor :"text-slate-300"}`}>

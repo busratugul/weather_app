@@ -1,7 +1,7 @@
 import axios from 'axios'
 const API_KEY = 'pESBPK_7Cgo1Q7k4aCbw4mUqadQuRW0GCAS7B22qhtk'
 
-/* Bu fonksiyon aranan şehire göre unsplashte bir arama yapar ve çektiği fotoyu hava durumu backgroundu yapar */
+/* BU MODUL ARANAN ŞEHİRE GÖRE UNSPLASHTE BİR ARAMA YAPAR VE ÇEKİLEN FOTOYU APP, HAVA DURUMUNUN BACKGROUNDU OLARAK KULLANIR.  */
 
 export default async function gettingBackgroundImg(searchedCity) {
   try {

@@ -19,23 +19,22 @@ function SearchedCity() {
   } = useContext(WeatherContext)
 
   useEffect(() => {
-    (async () => {
+    ;(async () => {
       if (permission) {
-        //console.log('konuma izin verildi')
+        //Eğer konuma izin verilirse
         return await getLocation()
-      }
-      if (!permission) {
+      } else {
+        //Eğer konuma izin verilmezse varsayılan şehir olarak istanbul gösterilecek
         const weatherData = await gettingCityWeather('İstanbul')
         const bgUrl = await gettingBackgroundImg('İstanbul')
         setCityWeather(weatherData)
         setBgImgURL(bgUrl)
         setLoading(false)
-        //console.log('konuma izin verilmedi')
       }
     })()
   }, [permission])
 
-  //aranan şehir geçerli ise ve error yoksa
+  //Yüklenme tamamlandıysa ve hata yoksa ve aranan şehir geçerli ise
   if (cityWeather && !error && !loading) {
     return (
       <section className="w-full h-full text-center py-4 grid gap-2 mt-5 relative fade-in text-zinc-50 cursor-pointer">
@@ -43,13 +42,13 @@ function SearchedCity() {
           className="absolute bg-cover w-full h-full bg-center bg-no-repeat blur-sm -z-1 opacity-50"
           style={{ backgroundImage: bgImgURL ? `url(${bgImgURL})` : 'none' }}
         ></div>
-        <div className="z-50">
+        <div className="z-50 mt-1">
           <h1 className="text-5xl font-bold">
             {cityWeather?.city?.name} ,
             <small className="text-base"> {cityWeather?.city?.country}</small>
           </h1>
-          <p className="text-base text-slate-300">{getCurrentDate()}</p>
-          <p className="capitalize mt-3 font-semibold">
+          <p className="text-base mt-1 text-slate-300">{getCurrentDate()}</p>
+          <p className="capitalize mt-2 font-semibold">
             {cityWeather.list && cityWeather?.list[0].weather[0]?.description}
           </p>
           <article className="flex justify-evenly align-center font-medium">
@@ -114,7 +113,7 @@ function SearchedCity() {
       </section>
     )
   }
-  //eğer hata mesajı varsa
+  //eğer hata mesajı varsa loading true olmuştur ve Loading componenti gösterilecek
   if (error || loading) {
     return (
       <section className="w-full border rounded border-slate-800 text-center py-10 grid gap-2 min-h-96 mt-5">

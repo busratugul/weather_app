@@ -5,6 +5,7 @@ function Alert() {
   const [isVisible, setIsVisible] = useState(true)
   const { setPermission, setLoading } = useContext(WeatherContext)
 
+  //Konum bilgisine izin verilsin
   function handleClick() {
     setPermission(true)
     setIsVisible(false)

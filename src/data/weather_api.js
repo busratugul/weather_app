@@ -2,7 +2,7 @@ import axios from 'axios'
 import { API_KEY } from '../context/WeatherContext'
 import gettingBackgroundImg from './background_api'
 
-//bu fonksiyon city parametresi alıcak, aldığı citye göre arama yapıp veriyi return eder
+/* BU MODUL ARANAN ŞEHİRİ PARAMETRE OLARAK ALIR, ARANAN ŞEHİRE GÖRE ARAMA YAPIP VERİYİ RETURN EDER */
 
 export default async function gettingCityWeather(searchedCity) {
   try {

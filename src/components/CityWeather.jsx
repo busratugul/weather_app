@@ -2,7 +2,6 @@ import { useContext, useEffect, useRef } from 'react'
 import WeatherContext from '../context/WeatherContext'
 
 function CityWeather() {
-  //contexten gerekli proplar alındı
   const { searchedCity, setSearchedCity, handleSubmit, error, txtColor } =
     useContext(WeatherContext)
 
@@ -27,6 +26,7 @@ function CityWeather() {
             ref={inputRef}
           />
           {error !== '' && (
+            //Geçersiz bir şehir arandıysa
             <div>
               <p className="text-red-500 mt-2 text-xs text-center">{error}</p>
             </div>

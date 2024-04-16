@@ -19,7 +19,6 @@ export const WeatherProvider = ({ children }) => {
   const [bgColor, setBgColor] = useState('bg-slate-800')
   const [permission, setPermission] = useState(false)
   
-
   const monthsList = [
     'Ocak',
     'Şubat',
@@ -43,23 +42,27 @@ export const WeatherProvider = ({ children }) => {
     let bgUrl = await gettingBackgroundImg(searchedCity)
     let weatherData = await gettingCityWeather(searchedCity)
 
-    if (searchedCity === '' || bgUrl === '') {
+    if (searchedCity === '') {
+      //boş isteği engelle
       setError('Lütfen Geçerli Bir Şehir İsmi Giriniz')
       setLoading(false)
     } else {
+      //eğer bir value girilmişse kontrol et
       if (weatherData.error) {
+        //eğer geçersiz bir şehir ise hata ver
         setError(weatherData.error)
         setSearchedCity('')
         setBgImgURL('')
         setCityWeather(null)
         setLoading(false)
       } else {
+        //geçerli bir şehir ise
+        setCityWeather(weatherData)
+        setBgColor(dataBgColor)
         let dataBgColor = bgColorIconNumber(
           weatherData?.list[0]?.weather[0]?.icon
         )
         let color = setTextColor(weatherData?.list[0]?.weather[0]?.icon)
-        setCityWeather(weatherData)
-        setBgColor(dataBgColor)
         setTextColor(color)
         setBgImgURL(bgUrl)
         setSearchedCity('')
@@ -82,27 +85,27 @@ export const WeatherProvider = ({ children }) => {
   //KONUM AL
   async function getLocation() {
     if (permission) {
+      //konuma izin verilmiş ise konumu al
       navigator.geolocation.getCurrentPosition(
         async (position) => {
           let { latitude, longitude } = position.coords
           let weatherData = await getLocationCity({ latitude, longitude })
+          //alınan konumu gerekli fonksiyonlara gönder
           setCityWeather(weatherData)
-
           let bgUrl = await gettingBackgroundImg(weatherData)
-
           let dataBgColor = bgColorIconNumber(
             weatherData?.list[0]?.weather[0]?.icon
           )
           let color = setTextColor(weatherData?.list[0]?.weather[0]?.icon)
-
           setBgColor(dataBgColor)
           setTxtColor(color)
           setBgImgURL(bgUrl)
           setLoading(false)
-          //console.log(weatherData);
         },
         (error) => {
-          console.log('Konum bilgisi alınamadı: ' + error.message)
+          //konum bilgisinde hata olursa
+          setError('Konum bilgisi alınamadı!')
+          console.log(error.message);
           setLoading(false)
         }
       )
@@ -127,7 +130,6 @@ export const WeatherProvider = ({ children }) => {
     bgColor,
     setBgColor,
     getLocation,
-    location,
     permission,
     setPermission,
     txtColor
