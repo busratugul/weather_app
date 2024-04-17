@@ -5,7 +5,6 @@ import gettingBackgroundImg from '../data/background_api'
 import bgColorIconNumber from '../data/background_color'
 import getLocationCity from '../data/location_api'
 import setTextColor from '../data/textcolor_api'
-import useFavorites from '../hooks/useFavorites'
 
 export const WeatherContext = createContext()
 
@@ -20,6 +19,7 @@ export const WeatherProvider = ({ children }) => {
   const [bgColor, setBgColor] = useState('bg-slate-800')
   const [permission, setPermission] = useState(false)
   const [favOpen, setFavOpen] = useState(false)
+  const [locationOpen, setLocationOpen] = useState(false)
 
   const inputRef = useRef(null) 
   
@@ -71,9 +71,24 @@ export const WeatherProvider = ({ children }) => {
         setBgImgURL(bgUrl)
         setSearchedCity('')
         setError('')
+        setFavOpen(false)
         setLoading(false)
       }
     }
+  }
+
+  async function defaultCityWeather() {
+    let weatherData = await gettingCityWeather('İstanbul')
+        let bgUrl = await gettingBackgroundImg('İstanbul')
+        setCityWeather(weatherData)
+        setBgImgURL(bgUrl)
+        let dataBgColor = bgColorIconNumber(
+          weatherData?.list[0]?.weather[0]?.icon
+        )
+        let color = setTextColor(weatherData?.list[0]?.weather[0]?.icon)
+        setBgColor(dataBgColor)
+        setTxtColor(color)
+        setLoading(false)
   }
 
   //DATE AYARLA
@@ -88,6 +103,7 @@ export const WeatherProvider = ({ children }) => {
 
   //KONUM AL
   async function getLocation() {
+    setLocationOpen(true)
     if (permission) {
       //konuma izin verilmiş ise konumu al
       navigator.geolocation.getCurrentPosition(
@@ -111,6 +127,7 @@ export const WeatherProvider = ({ children }) => {
           //konum bilgisinde hata olursa
           setError('Konum bilgisi alınamadı!')
           console.log(error.message);
+          setLocationOpen(false)
           setLoading(false)
         }
       )
@@ -119,10 +136,16 @@ export const WeatherProvider = ({ children }) => {
 
   //KONUM AL BUTONUNA TIKLANIRSA KONUMU AKTİF ET
   function clickedLocationBtn() {
-    setLoading(false)
-    setPermission(true)
-    getLocation()
-    setLoading(true)
+    if(!locationOpen){
+      setLoading(false)
+      setPermission(true)
+      getLocation()
+      setFavOpen(false)
+      setLoading(true)
+    }else {
+      setLocationOpen(false)
+      defaultCityWeather()
+    }
   }
 
   /* ---------------- PROPS ----------------- */
@@ -133,6 +156,7 @@ export const WeatherProvider = ({ children }) => {
     cityWeather,
     setCityWeather,
     error,
+    defaultCityWeather,
     getCurrentDate,
     loading,
     setLoading,
@@ -150,6 +174,8 @@ export const WeatherProvider = ({ children }) => {
     clickedLocationBtn,
     favOpen,
     setFavOpen,
+    setError,
+    locationOpen
   }
 
   return (

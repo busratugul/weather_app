@@ -1,29 +1,28 @@
 import { useContext, useEffect } from 'react'
 import WeatherContext from '../context/WeatherContext'
 import useFavorites from '../hooks/useFavorites'
+import FavCity from './FavCity'
 
 function FavCities() {
-  const { favOpen, setLoading } = useContext(WeatherContext)
-  const { favoriteCities, updateFavoriteCityWeather } = useFavorites()
+  const { favOpen, txtColor } = useContext(WeatherContext)
+  const { favoriteCities, updateFavoriteCityWeather} = useFavorites()
 
   useEffect(() => {
     if (favOpen && favoriteCities.length > 0) {
-      setLoading(true)
       favoriteCities.forEach((city) => {
         updateFavoriteCityWeather(city)
       })
-      setLoading(false)
     }
   }, [favOpen, favoriteCities])
 
   console.log(favoriteCities)
   if (favOpen && favoriteCities) {
     return (
-      <section className="fade-in flex flex-col mt-5 text-2xl">
-        <h1 className="text-center">Favori Şehirler</h1>
-        <ul>
+      <section className="w-full fade-in pb-5 text-2xl border-t border-slate-600">
+        <h1 className={`text-center my-5 ${txtColor ?txtColor :"text-slate-300"}`}>Favori Şehirler</h1>
+        <ul className='w-4/5 mx-auto'>
           {favoriteCities.map((city, idx) => (
-            <li key={idx}>{city.name}</li>
+            <FavCity key={idx} city={city}/>
           ))}
         </ul>
       </section>

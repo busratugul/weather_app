@@ -31,7 +31,7 @@ function CityWeather() {
           {error !== '' && (
             //Geçersiz bir şehir arandıysa
             <div>
-              <p className="text-red-500 mt-2 text-xs text-center">{error}</p>
+              <p className="text-red-500 mt-2 text-sm text-center">{error}</p>
             </div>
           )}
         </form>

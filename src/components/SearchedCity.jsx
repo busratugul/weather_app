@@ -9,6 +9,7 @@ import useFavorites from '../hooks/useFavorites'
 function SearchedCity() {
   const {
     cityWeather,
+    defaultCityWeather,
     getCurrentDate,
     setCityWeather,
     error,
@@ -24,23 +25,19 @@ function SearchedCity() {
   const {addFavoriteCity} = useFavorites()
 
   useEffect(() => {
-    ;(async () => {
+    (async () => {
       if (permission) {
         //Eğer konuma izin verilirse
         return await getLocation()
       } else {
         //Eğer konuma izin verilmezse varsayılan şehir olarak istanbul gösterilecek
-        const weatherData = await gettingCityWeather('İstanbul')
-        const bgUrl = await gettingBackgroundImg('İstanbul')
-        setCityWeather(weatherData)
-        setBgImgURL(bgUrl)
-        setLoading(false)
+        defaultCityWeather()
       }
     })()
   }, [permission])
 
   //Yüklenme tamamlandıysa ve hata yoksa ve aranan şehir geçerli ise
-  if (cityWeather && !error && !loading) {
+  if (cityWeather && !loading) {
     return (
       <section className="w-full h-full text-center py-4 grid gap-2 mt-5 relative fade-in text-zinc-50 cursor-pointer">
         {!favOpen ? (
@@ -140,7 +137,7 @@ function SearchedCity() {
   //eğer hata mesajı varsa loading true olmuştur ve Loading componenti gösterilecek
   if (error || loading) {
     return (
-      <section className="w-full border rounded border-slate-800 text-center py-10 grid gap-2 min-h-96 mt-5">
+      <section className="w-full rounded text-center py-10 grid gap-2 min-h-96 mt-5">
         <Loading />
       </section>
     )

@@ -1,73 +1,71 @@
-import { useState} from 'react';
+import { useContext, useState} from 'react';
 import gettingCityWeather from '../data/weather_api';
+import WeatherContext from '../context/WeatherContext';
 
 function useFavorites() {
-  // localStorage anahtarı
-  const anahtar = 'favoriteCities';
+  const key = 'favoriteCities';
+  const {setError} = useContext(WeatherContext)
   
-  // Favori şehirlerin state'i
   const [favoriteCities, setFavoriteCities] = useState(() => {
     try {
-      // localStorage'dan favori şehirleri al
-      const storedCities = window.localStorage.getItem(anahtar);
-      // JSON olarak parse et
-      return storedCities ? JSON.parse(storedCities) : [];
+      const storedCities = window.localStorage.getItem(key)
+      return storedCities ? JSON.parse(storedCities) : []
     } catch (error) {
-      console.error(error);
-      return [];
+      console.error(error)
+      return []
     }
-  });
+  })
 
-  // Favori şehir ekleme fonksiyonu
   const addFavoriteCity = (cityData) => {
-    const isCityExist = favoriteCities.some(city => city.id === cityData.city.id);
+    const isCityExist = favoriteCities.some(city => city.id === cityData.city.id)
   
-    if (!isCityExist && favoriteCities.length < 3) {
+    if (!isCityExist && favoriteCities.length < 10) {
       const newCity = {
         id: cityData.city.id,
         name: cityData.city.name,
-        temperature: cityData.list[0].temp,
+        temperature: cityData.list[0].main.temp,
         description: cityData.list[0].weather[0].description,
         maxTemp: cityData.list[0].main.temp_max,
         minTemp: cityData.list[0].main.temp_min,
-      };
+        icon: cityData.list[0].weather[0].icon
+      }
   
-      const newCities = [...favoriteCities, newCity];
-      setFavoriteCities(newCities);
-      window.localStorage.setItem(anahtar, JSON.stringify(newCities));
+      const newCities = [...favoriteCities, newCity]
+      setFavoriteCities(newCities)
+      window.localStorage.setItem(key, JSON.stringify(newCities))
     } else if (isCityExist) {
-      console.warn("Bu şehir zaten favori olarak eklenmiş.");
+      setError("Bu şehir zaten favori olarak eklenmiş.")
     } else {
-      console.warn("Favori şehir limitine ulaşıldı. Daha fazla şehir ekleyemezsiniz.");
+      setError("Favori şehir limitine ulaşıldı. Daha fazla şehir ekleyemezsiniz.")
     }
-  };
+  }
 
   // Favori şehirleri getirme fonksiyonu
   const getFavoriteCities = () => {
-    return favoriteCities;
-  };
+    return favoriteCities
+  }
 
   const updateFavoriteCityWeather = async (weather) => {
-    const cityData = favoriteCities.find(city => city.id === weather);
+    const cityData = favoriteCities.find(city => city.id === weather)
     if (cityData) {
       try {
         let weatherData = await gettingCityWeather(weather.name)
         cityData.temperature = weatherData.list[0].temp;
         cityData.description= weatherData.list[0].weather[0].description;
         setFavoriteCities([...favoriteCities]);
-        window.localStorage.setItem(anahtar, JSON.stringify(favoriteCities));
+        window.localStorage.setItem(key, JSON.stringify(favoriteCities));
       } catch (error) {
-        console.error("Hava durumu güncellenemedi:", error);
+        console.error("Hava durumu güncellenemedi:", error)
       }
     }
-  };
+  }
 
   return {
     favoriteCities,
     addFavoriteCity,
     getFavoriteCities,
     updateFavoriteCityWeather
-  };
+  }
 }
 
-export default useFavorites;
+export default useFavorites
