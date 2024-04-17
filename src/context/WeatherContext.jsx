@@ -5,6 +5,7 @@ import gettingBackgroundImg from '../data/background_api'
 import bgColorIconNumber from '../data/background_color'
 import getLocationCity from '../data/location_api'
 import setTextColor from '../data/textcolor_api'
+import useFavorites from '../hooks/useFavorites'
 
 export const WeatherContext = createContext()
 
@@ -18,8 +19,9 @@ export const WeatherProvider = ({ children }) => {
   const [txtColor, setTxtColor] = useState("")
   const [bgColor, setBgColor] = useState('bg-slate-800')
   const [permission, setPermission] = useState(false)
+  const [favOpen, setFavOpen] = useState(false)
 
-  const inputRef = useRef(null)
+  const inputRef = useRef(null) 
   
   const monthsList = [
     'Ocak',
@@ -145,7 +147,9 @@ export const WeatherProvider = ({ children }) => {
     setPermission,
     txtColor,
     inputRef,
-    clickedLocationBtn
+    clickedLocationBtn,
+    favOpen,
+    setFavOpen,
   }
 
   return (

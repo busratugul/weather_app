@@ -4,10 +4,9 @@ import SearchedCity from './components/SearchedCity'
 import WeatherContext from './context/WeatherContext'
 import DailyWeatherDetail from './components/DailyWeatherDetail'
 import Alert from './components/Alert'
-import Location from './components/Location'
 
 function App() {
-  const { sunSVG, bgColor, permission } = useContext(WeatherContext)
+  const { sunSVG, bgColor, permission} = useContext(WeatherContext)
   
   return (
     <main
