@@ -1,19 +1,22 @@
 import { useContext, useEffect, useRef } from 'react'
 import WeatherContext from '../context/WeatherContext'
+import Location from './Location'
+import Favorites from './Favorites'
 
 function CityWeather() {
-  const { searchedCity, setSearchedCity, handleSubmit, error, txtColor } =
+  const { inputRef, searchedCity, setSearchedCity, handleSubmit, error, txtColor } =
     useContext(WeatherContext)
 
-  const inputRef = useRef(null)
   useEffect(() => {
     inputRef.current.focus()
-  },[searchedCity])
-  
+  }, [searchedCity])
+
   return (
-    <section className="h-100 grid w-full place-items-start">
-      <article className="flex flex-col items-center mx-auto">
-        <p className={`text-sm mb-2 ${txtColor ?txtColor :"text-slate-300"}`}>
+    <section className="flex items-end w-full">
+      <Location />
+      <article className="flex flex-col flex-grow items-center mx-auto">
+        <label className='w-full'>
+        <p className={`text-sm mb-2 text-center ${txtColor ? txtColor : 'text-slate-300'}`}>
           Hava durumu bilgisi için bir şehir girin.
         </p>
         <form className="w-full" onSubmit={(e) => handleSubmit(e)}>
@@ -32,7 +35,9 @@ function CityWeather() {
             </div>
           )}
         </form>
+        </label>
       </article>
+      <Favorites />
     </section>
   )
 }

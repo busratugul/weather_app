@@ -1,4 +1,4 @@
-import { createContext, useState } from 'react'
+import { createContext, useState, useRef } from 'react'
 import gettingCityWeather from '../data/weather_api'
 import sunSVG from '../assets/clear.png'
 import gettingBackgroundImg from '../data/background_api'
@@ -18,6 +18,8 @@ export const WeatherProvider = ({ children }) => {
   const [txtColor, setTxtColor] = useState("")
   const [bgColor, setBgColor] = useState('bg-slate-800')
   const [permission, setPermission] = useState(false)
+
+  const inputRef = useRef(null)
   
   const monthsList = [
     'Ocak',
@@ -58,12 +60,12 @@ export const WeatherProvider = ({ children }) => {
       } else {
         //geçerli bir şehir ise
         setCityWeather(weatherData)
-        setBgColor(dataBgColor)
         let dataBgColor = bgColorIconNumber(
           weatherData?.list[0]?.weather[0]?.icon
         )
+        setBgColor(dataBgColor)
         let color = setTextColor(weatherData?.list[0]?.weather[0]?.icon)
-        setTextColor(color)
+        setTxtColor(color)
         setBgImgURL(bgUrl)
         setSearchedCity('')
         setError('')
@@ -101,6 +103,7 @@ export const WeatherProvider = ({ children }) => {
           setTxtColor(color)
           setBgImgURL(bgUrl)
           setLoading(false)
+          inputRef.current.focus()
         },
         (error) => {
           //konum bilgisinde hata olursa
@@ -110,6 +113,14 @@ export const WeatherProvider = ({ children }) => {
         }
       )
     }
+  }
+
+  //KONUM AL BUTONUNA TIKLANIRSA KONUMU AKTİF ET
+  function clickedLocationBtn() {
+    setLoading(false)
+    setPermission(true)
+    getLocation()
+    setLoading(true)
   }
 
   /* ---------------- PROPS ----------------- */
@@ -132,7 +143,9 @@ export const WeatherProvider = ({ children }) => {
     getLocation,
     permission,
     setPermission,
-    txtColor
+    txtColor,
+    inputRef,
+    clickedLocationBtn
   }
 
   return (

@@ -3,7 +3,7 @@ import WeatherContext from '../context/WeatherContext'
 
 function Alert() {
   const [isVisible, setIsVisible] = useState(true)
-  const { setPermission, setLoading } = useContext(WeatherContext)
+  const { setPermission, setLoading, inputRef } = useContext(WeatherContext)
 
   //Konum bilgisine izin verilsin
   function handleClick() {
@@ -16,6 +16,7 @@ function Alert() {
     const timer = setTimeout(() => {
       setIsVisible(false)
     }, 5000)
+    inputRef.current.focus()
     return () => clearTimeout(timer)
   }, [isVisible])
 
