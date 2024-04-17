@@ -1,8 +1,6 @@
 import { useContext, useEffect } from 'react'
 import WeatherContext from '../context/WeatherContext'
-import gettingCityWeather from '../data/weather_api'
 import Loading from './Loading'
-import gettingBackgroundImg from '../data/background_api'
 import FavCities from './FavCities'
 import useFavorites from '../hooks/useFavorites'
 
@@ -11,14 +9,11 @@ function SearchedCity() {
     cityWeather,
     defaultCityWeather,
     getCurrentDate,
-    setCityWeather,
     error,
     loading,
     bgImgURL,
-    setBgImgURL,
     getLocation,
     permission,
-    setLoading,
     favOpen,
   } = useContext(WeatherContext)
 
@@ -31,7 +26,7 @@ function SearchedCity() {
         return await getLocation()
       } else {
         //Eğer konuma izin verilmezse varsayılan şehir olarak istanbul gösterilecek
-        defaultCityWeather()
+        defaultCityWeather("İstanbul")
       }
     })()
   }, [permission])

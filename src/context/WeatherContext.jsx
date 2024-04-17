@@ -15,14 +15,14 @@ export const WeatherProvider = ({ children }) => {
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(true)
   const [bgImgURL, setBgImgURL] = useState('')
-  const [txtColor, setTxtColor] = useState("")
+  const [txtColor, setTxtColor] = useState('')
   const [bgColor, setBgColor] = useState('bg-slate-800')
   const [permission, setPermission] = useState(false)
   const [favOpen, setFavOpen] = useState(false)
   const [locationOpen, setLocationOpen] = useState(false)
 
-  const inputRef = useRef(null) 
-  
+  const inputRef = useRef(null)
+
   const monthsList = [
     'Ocak',
     'Şubat',
@@ -39,19 +39,19 @@ export const WeatherProvider = ({ children }) => {
   ]
 
   /* -------------- FUNCTIONS  -----------------*/
+
   //ŞEHİR ARA
   const handleSubmit = async (e) => {
     e.preventDefault()
     setBgImgURL('')
-    let bgUrl = await gettingBackgroundImg(searchedCity)
-    let weatherData = await gettingCityWeather(searchedCity)
-
     if (searchedCity === '') {
       //boş isteği engelle
       setError('Lütfen Geçerli Bir Şehir İsmi Giriniz')
       setLoading(false)
     } else {
       //eğer bir value girilmişse kontrol et
+      let bgUrl = await gettingBackgroundImg(searchedCity)
+      let weatherData = await gettingCityWeather(searchedCity)
       if (weatherData.error) {
         //eğer geçersiz bir şehir ise hata ver
         setError(weatherData.error)
@@ -77,18 +77,16 @@ export const WeatherProvider = ({ children }) => {
     }
   }
 
-  async function defaultCityWeather() {
-    let weatherData = await gettingCityWeather('İstanbul')
-        let bgUrl = await gettingBackgroundImg('İstanbul')
-        setCityWeather(weatherData)
-        setBgImgURL(bgUrl)
-        let dataBgColor = bgColorIconNumber(
-          weatherData?.list[0]?.weather[0]?.icon
-        )
-        let color = setTextColor(weatherData?.list[0]?.weather[0]?.icon)
-        setBgColor(dataBgColor)
-        setTxtColor(color)
-        setLoading(false)
+  async function defaultCityWeather(city) {
+    let weatherData = await gettingCityWeather(city)
+    let bgUrl = await gettingBackgroundImg(city)
+    setCityWeather(weatherData)
+    setBgImgURL(bgUrl)
+    let dataBgColor = bgColorIconNumber(weatherData?.list[0]?.weather[0]?.icon)
+    let color = setTextColor(weatherData?.list[0]?.weather[0]?.icon)
+    setBgColor(dataBgColor)
+    setTxtColor(color)
+    setLoading(false)
   }
 
   //DATE AYARLA
@@ -126,7 +124,7 @@ export const WeatherProvider = ({ children }) => {
         (error) => {
           //konum bilgisinde hata olursa
           setError('Konum bilgisi alınamadı!')
-          console.log(error.message);
+          console.log(error.message)
           setLocationOpen(false)
           setLoading(false)
         }
@@ -136,15 +134,15 @@ export const WeatherProvider = ({ children }) => {
 
   //KONUM AL BUTONUNA TIKLANIRSA KONUMU AKTİF ET
   function clickedLocationBtn() {
-    if(!locationOpen){
+    if (!locationOpen) {
       setLoading(false)
       setPermission(true)
       getLocation()
       setFavOpen(false)
       setLoading(true)
-    }else {
+    } else {
       setLocationOpen(false)
-      defaultCityWeather()
+      defaultCityWeather("İstanbul")
     }
   }
 
@@ -175,7 +173,7 @@ export const WeatherProvider = ({ children }) => {
     favOpen,
     setFavOpen,
     setError,
-    locationOpen
+    locationOpen,
   }
 
   return (

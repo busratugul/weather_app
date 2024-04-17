@@ -11,7 +11,7 @@ function Favorites() {
         title="Favoriler"
         className={`${
           favOpen ? 'text-blue-500' : txtColor ? txtColor : 'text-slate-300'
-        } hover:text-blue-300 duration-300 w-20 cursor-pointer`}
+        } hover:text-blue-500 duration-300 w-20 cursor-pointer`}
         onClick={() => setFavOpen(!favOpen)}
       >
         <MdFavorite className="mx-auto" />
