@@ -1,11 +1,11 @@
-import { useContext, useState} from 'react';
+import { useContext, useEffect, useState} from 'react';
 import gettingCityWeather from '../data/weather_api';
 import WeatherContext from '../context/WeatherContext';
 
 function useFavorites() {
   const key = 'favoriteCities';
   const {setError} = useContext(WeatherContext)
-  
+
   const [favoriteCities, setFavoriteCities] = useState(() => {
     try {
       const storedCities = window.localStorage.getItem(key)
@@ -40,17 +40,16 @@ function useFavorites() {
     }
   }
 
-  // Favori şehirleri getirme fonksiyonu
   const getFavoriteCities = () => {
     return favoriteCities
   }
 
   const updateFavoriteCityWeather = async (weather) => {
-    const cityData = favoriteCities.find(city => city.id === weather)
+    const cityData = favoriteCities.find(city => city.id === weather.id)
     if (cityData) {
       try {
         let weatherData = await gettingCityWeather(weather.name)
-        cityData.temperature = weatherData.list[0].temp;
+        cityData.temperature = weatherData.list[0].main.temp;
         cityData.description= weatherData.list[0].weather[0].description;
         setFavoriteCities([...favoriteCities]);
         window.localStorage.setItem(key, JSON.stringify(favoriteCities));
@@ -60,11 +59,18 @@ function useFavorites() {
     }
   }
 
+  const removeFavoriteCity = (cityId) => {
+    const updatedCities = favoriteCities.filter(city => city.id !== cityId)
+    window.localStorage.setItem(key, JSON.stringify(updatedCities))
+    setFavoriteCities(updatedCities)
+  }
+
   return {
     favoriteCities,
     addFavoriteCity,
     getFavoriteCities,
-    updateFavoriteCityWeather
+    updateFavoriteCityWeather,
+    removeFavoriteCity
   }
 }
 
