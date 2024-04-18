@@ -21,6 +21,3 @@ function Location() {
 }
 
 export default Location
-
-/* className="flex flex-col flex-grow items-center mx-auto">
-        <p className={`text-sm mb-2 ${txtColor ? txtColor : 'text-slate-300'}`} */

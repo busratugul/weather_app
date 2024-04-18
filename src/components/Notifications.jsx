@@ -4,6 +4,7 @@ import { FaCheckCircle } from "react-icons/fa";
 
 function Notifications() {
   const { notification, setNotification } = useContext(WeatherContext)
+
   useEffect(() => {
     if (notification.visible) {
       const timer = setTimeout(() => {
@@ -14,6 +15,7 @@ function Notifications() {
       }
     }
   })
+  
   if (!notification.visible) {
     return null
   }

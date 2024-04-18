@@ -4,8 +4,7 @@ import Location from './Location'
 import Favorites from './Favorites'
 
 function CityWeather() {
-  const { inputRef, searchedCity, setSearchedCity, handleSubmit, error, txtColor } =
-    useContext(WeatherContext)
+  const { inputRef, searchedCity, setSearchedCity, handleSubmit, error,txtColor } = useContext(WeatherContext)
 
   useEffect(() => {
     inputRef.current.focus()

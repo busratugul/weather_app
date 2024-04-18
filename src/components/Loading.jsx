@@ -3,6 +3,7 @@ import WeatherContext from '../context/WeatherContext'
 
 function Loading() {
     const {sunSVG} = useContext(WeatherContext)
+    
   return (
     <div className="grid place-items-center min-h-96">
       <img src={sunSVG} alt="loading iconu" className="sun-icon rotate" />

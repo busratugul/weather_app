@@ -1,25 +1,23 @@
-import { useContext, useEffect, useState } from 'react'
+import { useContext, useEffect } from 'react'
 import WeatherContext from '../context/WeatherContext'
-import useFavorites from '../hooks/useFavorites'
 import FavCity from './FavCity'
 
 function FavCities() {
-  const { favOpen, txtColor } = useContext(WeatherContext)
-  const { favoriteCities, updateFavoriteCityWeather } = useFavorites()
+  const { favOpen, txtColor, storedValue, updateStoredValue } =
+    useContext(WeatherContext)
 
   useEffect(() => {
-    if (favOpen && favoriteCities.length > 0) {
-      favoriteCities.forEach((city) => {
-        updateFavoriteCityWeather(city)
+    if (favOpen && storedValue.length > 0) {
+      storedValue.forEach((city) => {
+        updateStoredValue(city)
       })
     }
   }, [favOpen])
-  console.log(favoriteCities)
 
   if (favOpen) {
     return (
       <section className="w-full min-h-80 fade-in pb-5 text-2xl border-t border-slate-600">
-        {favoriteCities.length > 0 ? (
+        {storedValue.length > 0 ? (
           <>
             <h1
               className={`font-semibold text-center my-5 ${
@@ -29,14 +27,14 @@ function FavCities() {
               Favori Şehirler
             </h1>
             <ul className="w-4/5 mx-auto">
-              {favoriteCities.map((city, idx) => (
+              {storedValue.map((city, idx) => (
                 <FavCity key={idx} city={city} />
               ))}
             </ul>
           </>
         ) : (
-          <div className='w-full h-full grid place-items-center'>
-            <p className='text-gray-700'>Favori Şehriniz Bulunmamaktadır.</p>
+          <div className="w-full h-full grid place-items-center">
+            <p className="text-gray-400">Favori Şehriniz Bulunmamaktadır.</p>
           </div>
         )}
       </section>

@@ -2,7 +2,6 @@ import { useContext, useEffect } from 'react'
 import WeatherContext from '../context/WeatherContext'
 import Loading from './Loading'
 import FavCities from './FavCities'
-import useFavorites from '../hooks/useFavorites'
 
 function SearchedCity() {
   const {
@@ -15,10 +14,9 @@ function SearchedCity() {
     getLocation,
     permission,
     favOpen,
+    addStoredValue,
     setNotification
   } = useContext(WeatherContext)
-
-  const {addFavoriteCity} = useFavorites()
 
   useEffect(() => {
     (async () => {
@@ -27,10 +25,19 @@ function SearchedCity() {
         return await getLocation()
       } else {
         //Eğer konuma izin verilmezse varsayılan şehir olarak istanbul gösterilecek
-        defaultCityWeather("İstanbul")
+        defaultCityWeather('İstanbul')
       }
     })()
   }, [permission])
+
+  //Ekle butonuna basılınca favori şehirlere eklenecek
+  function handleClick(cityWeather){
+    setNotification({
+      content: `${cityWeather.city?.name} Favori Listenize Eklendi.`,
+      visible: true
+    })
+  addStoredValue(cityWeather)
+  }
 
   //Yüklenme tamamlandıysa ve hata yoksa ve aranan şehir geçerli ise
   if (cityWeather && !loading) {
@@ -117,8 +124,10 @@ function SearchedCity() {
                 </div>
               </article>
               <div className="w-full relative">
-                <button className="absolute right-10 bottom-0 text-sm text-slate-200 hover:underline"
-                onClick={() => addFavoriteCity(cityWeather)}>
+                <button
+                  className="absolute right-10 bottom-0 text-sm text-slate-200 hover:underline"
+                  onClick={() => handleClick(cityWeather)}
+                >
                   Ekle
                 </button>
               </div>
