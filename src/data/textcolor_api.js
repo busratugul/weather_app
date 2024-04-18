@@ -8,6 +8,5 @@ export default function setTextColor(icon) {
     else if(icon === "02d"){
       text_color = "text-slate-100" 
     }
-    console.log(text_color);
     return text_color
   }

@@ -31,12 +31,23 @@ function SearchedCity() {
   }, [permission])
 
   //Ekle butonuna basılınca favori şehirlere eklenecek
-  function handleClick(cityWeather){
+  function addFavCity(cityWeather) {
+    const result = addStoredValue(cityWeather)
+  
+    if (result && result.error) {
+      setNotification({
+        type: "error",
+        content: result.error,
+        visible: true
+      });
+      return;
+    }
+  
     setNotification({
+      type: "success",
       content: `${cityWeather.city?.name} Favori Listenize Eklendi.`,
       visible: true
     })
-  addStoredValue(cityWeather)
   }
 
   //Yüklenme tamamlandıysa ve hata yoksa ve aranan şehir geçerli ise
@@ -126,7 +137,7 @@ function SearchedCity() {
               <div className="w-full relative">
                 <button
                   className="absolute right-10 bottom-0 text-sm text-slate-200 hover:underline"
-                  onClick={() => handleClick(cityWeather)}
+                  onClick={() => addFavCity(cityWeather)}
                 >
                   Ekle
                 </button>

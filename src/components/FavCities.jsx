@@ -3,15 +3,31 @@ import WeatherContext from '../context/WeatherContext'
 import FavCity from './FavCity'
 
 function FavCities() {
-  const { favOpen, txtColor, storedValue, updateStoredValue } =
+  const { favOpen, txtColor, storedValue, updateStoredValue, setNotification } =
     useContext(WeatherContext)
 
   useEffect(() => {
-    if (favOpen && storedValue.length > 0) {
-      storedValue.forEach((city) => {
-        updateStoredValue(city)
-      })
-    }
+    (async () => {
+      if (favOpen && storedValue.length > 0) {
+        for (const city of storedValue) {
+          const result = await updateStoredValue(city)
+          if (result && result.error) {
+            console.error(result.error)
+            setNotification({
+              type: 'error',
+              content: result.error,
+              visible: 'true',
+            })
+            return
+          }
+        }
+        setNotification({
+          type: 'success',
+          content: 'Favori Listeniz Güncellendi.',
+          visible: 'true',
+        })
+      }
+    })()
   }, [favOpen])
 
   if (favOpen) {

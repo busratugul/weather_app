@@ -22,6 +22,7 @@ export const WeatherProvider = ({ children }) => {
   const [favOpen, setFavOpen] = useState(false)
   const [locationOpen, setLocationOpen] = useState(false)
   const [notification, setNotification] = useState({
+    type: "",
     content: '',
     visible: false,
   })
@@ -117,6 +118,7 @@ export const WeatherProvider = ({ children }) => {
     if (permission) {
       //konuma izin verilmiş ise konumu al
       setNotification({
+        type:"success",
         content: 'Konum Paylaşımı Aktif Edildi.',
         visible: 'true',
       })
@@ -162,6 +164,7 @@ export const WeatherProvider = ({ children }) => {
       setLoading(true)
     } else {
       setNotification({
+        type:"success",
         content: 'Konum Paylaşımı Devre Dışı Bırakıldı.',
         visible: 'true',
       })

@@ -22,6 +22,7 @@ function FavCity({ city }) {
   //sil butonuna basıldığı zaman favori şehir silinecek
   function removeFavCity(city) {
     setNotification({
+      type:"success",
       content: `${city.name} Favori Listenizden Kaldırıldı.`,
       visible: true,
     })

@@ -1,5 +1,6 @@
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import gettingCityWeather from '../data/weather_api'
+import WeatherContext from '../context/WeatherContext'
 
 function useLocalStorage() {
   const key = 'favoriteCities'
@@ -35,11 +36,10 @@ function useLocalStorage() {
       setStoredValue(newCities)
       window.localStorage.setItem(key, JSON.stringify(newCities))
     } else if (isValueExist) {
-      console.log('Bu şehir zaten favori olarak eklenmiş.')
+      return {error: 'Bu şehir zaten favori olarak eklenmiş.'}
     } else {
-      console.log(
-        'Favori şehir limitine ulaşıldı. Daha fazla şehir ekleyemezsiniz.'
-      )
+      return {error: 'Favori şehir limitine ulaşıldı. Daha fazla şehir ekleyemezsiniz.'}
+      
     }
   }
 
@@ -58,12 +58,8 @@ function useLocalStorage() {
         data.description = weatherData.list[0].weather[0].description
         setStoredValue([...storedValue])
         window.localStorage.setItem(key, JSON.stringify(storedValue))
-        setNotification({
-          content: 'Hava Durumları Güncellendi.',
-          visible: true,
-        })
       } catch (error) {
-        console.error('Hava durumu güncellenemedi:', error)
+        return { error: 'Hava durumu güncellenemedi:'}
       }
     }
   }
