@@ -20,6 +20,10 @@ export const WeatherProvider = ({ children }) => {
   const [permission, setPermission] = useState(false)
   const [favOpen, setFavOpen] = useState(false)
   const [locationOpen, setLocationOpen] = useState(false)
+  const [notification, setNotification] = useState({
+    content:"",
+    visible: false
+  })
 
   const inputRef = useRef(null)
 
@@ -104,6 +108,7 @@ export const WeatherProvider = ({ children }) => {
     setLocationOpen(true)
     if (permission) {
       //konuma izin verilmiş ise konumu al
+      setNotification({content: "Konum Paylaşımı Aktif Edildi.", visible:"true"})
       navigator.geolocation.getCurrentPosition(
         async (position) => {
           let { latitude, longitude } = position.coords
@@ -137,12 +142,13 @@ export const WeatherProvider = ({ children }) => {
     if (!locationOpen) {
       setLoading(false)
       setPermission(true)
+      setNotification({content: "Konum Paylaşımı Aktif Edildi.", visible:"true"})
       getLocation()
       setFavOpen(false)
       setLoading(true)
     } else {
+      setNotification({content: "Konum Paylaşımı Devre Dışı Bırakıldı.", visible:"true"})
       setLocationOpen(false)
-      defaultCityWeather("İstanbul")
     }
   }
 
@@ -174,6 +180,8 @@ export const WeatherProvider = ({ children }) => {
     setFavOpen,
     setError,
     locationOpen,
+    notification,
+    setNotification
   }
 
   return (

@@ -15,6 +15,7 @@ function SearchedCity() {
     getLocation,
     permission,
     favOpen,
+    setNotification
   } = useContext(WeatherContext)
 
   const {addFavoriteCity} = useFavorites()

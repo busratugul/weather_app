@@ -4,7 +4,7 @@ import WeatherContext from '../context/WeatherContext';
 
 function useFavorites() {
   const key = 'favoriteCities';
-  const {setError} = useContext(WeatherContext)
+  const {setError, setNotification} = useContext(WeatherContext)
 
   const [favoriteCities, setFavoriteCities] = useState(() => {
     try {
@@ -19,7 +19,7 @@ function useFavorites() {
   const addFavoriteCity = (cityData) => {
     const isCityExist = favoriteCities.some(city => city.id === cityData.city.id)
   
-    if (!isCityExist && favoriteCities.length < 10) {
+    if (!isCityExist && favoriteCities.length < 3) {
       const newCity = {
         id: cityData.city.id,
         name: cityData.city.name,
@@ -32,6 +32,10 @@ function useFavorites() {
   
       const newCities = [...favoriteCities, newCity]
       setFavoriteCities(newCities)
+      setNotification({
+        content: `${cityData.city?.name} Favori Listenize Eklendi.`,
+        visible: true
+      })
       window.localStorage.setItem(key, JSON.stringify(newCities))
     } else if (isCityExist) {
       setError("Bu şehir zaten favori olarak eklenmiş.")
@@ -53,16 +57,24 @@ function useFavorites() {
         cityData.description= weatherData.list[0].weather[0].description;
         setFavoriteCities([...favoriteCities]);
         window.localStorage.setItem(key, JSON.stringify(favoriteCities));
+        setNotification({
+          content: "Hava Durumları Güncellendi.",
+          visible: true
+        })
       } catch (error) {
         console.error("Hava durumu güncellenemedi:", error)
       }
     }
   }
 
-  const removeFavoriteCity = (cityId) => {
-    const updatedCities = favoriteCities.filter(city => city.id !== cityId)
+  const removeFavoriteCity = (cityData) => {
+    const updatedCities = favoriteCities.filter(city => city.id !== cityData.id)
     window.localStorage.setItem(key, JSON.stringify(updatedCities))
     setFavoriteCities(updatedCities)
+    setNotification({
+      content: `${cityData.name} Favori Listenizden Kaldırıldı.`,
+      visible: true
+    })
   }
 
   return {

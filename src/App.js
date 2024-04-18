@@ -4,6 +4,7 @@ import SearchedCity from './components/SearchedCity'
 import WeatherContext from './context/WeatherContext'
 import DailyWeatherDetail from './components/DailyWeatherDetail'
 import Alert from './components/Alert'
+import Notifications from './components/Notifications'
 
 function App() {
   const { sunSVG, bgColor, permission} = useContext(WeatherContext)
@@ -26,6 +27,7 @@ function App() {
         <CityWeather />
         <SearchedCity />
         <DailyWeatherDetail />
+        <Notifications/>
       </article>
     </main>
   )

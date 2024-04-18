@@ -33,7 +33,7 @@ function FavCity({ city }) {
             <span>Y: {Math.round(city.maxTemp)}</span>
             <span className="ms-5">D: {Math.round(city.minTemp)}</span>
           </p>
-          <button onClick={() => removeFavoriteCity(city.id)}>sil</button>
+          <button onClick={() => removeFavoriteCity(city)}>sil</button>
         </div>
       </li>
     )

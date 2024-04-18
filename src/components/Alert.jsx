@@ -15,7 +15,7 @@ function Alert() {
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsVisible(false)
-    }, 5000)
+    }, 3000)
     inputRef.current.focus()
     return () => clearTimeout(timer)
   }, [isVisible])
