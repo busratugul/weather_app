@@ -14,7 +14,7 @@ function FavCity({ city }) {
   if (storedValue.length > 0 && favOpen) {
     return (
       <li
-        className={`relative w-full h-28 border border-slate-700 rounded-md flex justify-between mb-5 shadow-md shadow-gray-900 px-16 py-5 hover:bg-slate-800 ${
+        className={`relative w-full h-24 border border-slate-700 rounded-md flex justify-between mb-5 shadow-md shadow-gray-900 px-16 py-4 hover:bg-slate-800 ${
           isDeleteOpen ? 'bg-slate-800 opacity-50' : 'bg-slate-700'
         }`}
         onClick={() => setIsDeleteOpen(!isDeleteOpen)}
@@ -33,14 +33,14 @@ function FavCity({ city }) {
               : 'bg-transparent'
           }`}
         ></div>
-        <div className="text-left flex flex-col justify-between">
-          <h3 className="font-semibold">{city.name}</h3>
+        <div className="text-left">
+          <h3 className="font-semibold mb-3">{city.name}</h3>
           <p className="text-base text-slate-400 capitalize">
             {city.description}
           </p>
         </div>
         <div>
-          <p className="font-semibold mb-5">
+          <p className="font-semibold mb-3">
             {Math.round(city.temperature)} °C
           </p>
           <p className="text-base text-slate-400 flex justify-between">
@@ -48,7 +48,7 @@ function FavCity({ city }) {
             <span className="ms-5">D: {Math.round(city.minTemp)}</span>
           </p>
         </div>
-        <DeleteListItemBtn isDeleteOpen={isDeleteOpen} city={city.name} />
+        <DeleteListItemBtn isDeleteOpen={isDeleteOpen} city={city} />
       </li>
     )
   }

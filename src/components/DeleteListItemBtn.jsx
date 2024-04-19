@@ -16,7 +16,7 @@ function DeleteListItemBtn({ city }) {
           </button>
         </div>
         <div className="absolute right-4 top-1/3">
-          <button onClick={() => detailFavCity(city)}>
+          <button onClick={() => detailFavCity(city.name)}>
             <FaEye className="text-blue-500" />
           </button>
         </div>

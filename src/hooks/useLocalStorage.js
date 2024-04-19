@@ -21,7 +21,7 @@ function useLocalStorage() {
       (item) => item.id === data.city.id
     )
 
-    if (!isValueExist && storedValue.length < 3) {
+    if (!isValueExist && storedValue.length < 5) {
       const newCity = {
         id: data.city.id,
         name: data.city.name,
