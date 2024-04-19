@@ -38,7 +38,7 @@ function FavCity({ city }) {
   if (storedValue.length > 0 && favOpen) {
     return (
       <li
-        className={`relative w-full h-24 border border-slate-700 rounded-md flex justify-between mb-5 shadow-md shadow-gray-900 px-16 py-4 hover:bg-slate-800 ${
+        className={`relative w-full h-24 border border-slate-700 rounded-md flex justify-between items-center mb-5 shadow-md text-base lg:text-lg 2xl:text-xl shadow-gray-900 px-12 lg:px-16 py-3 hover:bg-slate-800 ${
           isDeleteOpen ? 'bg-slate-800 opacity-50' : 'bg-slate-700'
         }`}
         onClick={() => setIsDeleteOpen(!isDeleteOpen)}
@@ -58,18 +58,18 @@ function FavCity({ city }) {
           }`}
         ></div>
         <div className="text-left">
-          <h3 className="font-semibold mb-3">{city.name}</h3>
-          <p className="text-base text-slate-400 capitalize">
+          <h3 className="font-semibold mb-2">{city.name}</h3>
+          <p className="text-xs sm:text-base text-slate-400 capitalize">
             {city.description}
           </p>
         </div>
         <div>
-          <p className="font-semibold mb-3">
+          <p className="font-semibold mb-2">
             {Math.round(city.temperature)} °C
           </p>
-          <p className="text-base text-slate-400 flex justify-between">
+          <p className=" text-slate-400 flex justify-between text-xs sm:text-base">
             <span>Y: {Math.round(city.maxTemp)}</span>
-            <span className="ms-5">D: {Math.round(city.minTemp)}</span>
+            <span className="ms-2 lg:ms-5 xl:ms-5 2xl:ms-5">D: {Math.round(city.minTemp)}</span>
           </p>
         </div>
         <DeleteListItemBtn

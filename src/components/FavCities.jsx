@@ -32,7 +32,7 @@ function FavCities() {
 
   if (favOpen) {
     return (
-      <section className="w-full min-h-80 fade-in pb-5 text-2xl border-t border-slate-600">
+      <section className="w-full min-h-80 fade-in text-xl lg:text-2xl border-t border-slate-600">
         {storedValue.length > 0 ? (
           <>
             <h1

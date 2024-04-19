@@ -21,7 +21,7 @@ function Notifications() {
     return null
   }
   return (
-    <div className="fixed min-w-72 max-h-28 top-4 right-3 z-50">
+    <div className="fixed w-60 lg:w-72 max-h-24 top-4 right-3 z-50">
       <div className="bg-slate-200 rounded-md shadow-md p-3">
         <p className="text-sm font-medium text-gray-800 flex items-center">
           {notification.type === 'success' ? (
@@ -31,7 +31,7 @@ function Notifications() {
           )}
           {notification.type === 'success' ? 'Başarılı' : 'Dikkat'}
         </p>
-        <p className="text-sm text-gray-600 mt-2 ms-6">
+        <p className="text-xs lg:text-sm text-gray-600 mt-2 ms-6">
           {notification.content}
         </p>
       </div>

@@ -6,7 +6,7 @@ function Favorites() {
   const { txtColor, favOpen, setFavOpen } = useContext(WeatherContext)
 
   return (
-    <article className="w-1/4 text-3xl grid place-items-center">
+    <>
       <button
         title="Favoriler"
         className={`${
@@ -14,9 +14,9 @@ function Favorites() {
         } hover:text-blue-500 duration-300 w-20 cursor-pointer`}
         onClick={() => setFavOpen(!favOpen)}
       >
-        <MdFavorite className="mx-auto" />
+        <MdFavorite className="mx-auto text-2xl lg:text-3xl 2xl:text-4xl" />
       </button>
-    </article>
+    </>
   )
 }
 

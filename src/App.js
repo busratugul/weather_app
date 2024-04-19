@@ -11,24 +11,22 @@ function App() {
   
   return (
     <main
-      className={`h-lvh w-full  text-zinc-50 py-4 font-poppins overflow-y-hidden ${bgColor}`}
+      className={`h-screen box-border text-zinc-50 font-poppins overflow-y-hidden py-5 ${bgColor}`} 
     >
-      <nav className="w-full h-20 mt-2">
-        <h1 className="text-center text-2xl text-blue-600 tracking-wider">
-          <span className="ps-2 py-1 before:block before:absolute before:-inset-1 before:-skew-y-3 before:bg-blue-600 before:rounded relative inline-block">
-            <span className="relative text-zinc-50 flex">
-              iWeather <img src={sunSVG} className="w-8" />
+      <nav className="w-full">
+        <h1 className="text-center text-base text-blue-600 tracking-wider mt-5">
+          <span className="ps-2 before:block before:absolute before:-inset-1 before:-skew-y-3 before:bg-blue-600 before:rounded relative inline-block">
+            <span className="relative text-zinc-50 flex items-center">
+              iWeather <img src={sunSVG} className="w-6" />
             </span>
           </span>
         </h1>
         {!permission && <Alert/>}
       </nav>
-      <article>
         <CityWeather />
         <SearchedCity />
         <DailyWeatherDetail />
         <Notifications/>
-      </article>
     </main>
   )
 }

@@ -53,7 +53,7 @@ function SearchedCity() {
   //Yüklenme tamamlandıysa ve hata yoksa ve aranan şehir geçerli ise
   if (cityWeather && !loading) {
     return (
-      <section className="w-full h-full text-center py-4 grid gap-2 mt-5 relative fade-in text-zinc-50 cursor-pointer">
+      <section className="max-h-96 text-center py-4 grid gap-2 mt-5 relative fade-in text-zinc-50 cursor-pointer">
         {!favOpen ? (
           <>
             <div
@@ -62,22 +62,22 @@ function SearchedCity() {
                 backgroundImage: bgImgURL ? `url(${bgImgURL})` : 'none',
               }}
             ></div>
-            <div className="z-50 mt-1">
-              <h1 className="text-5xl font-bold">
+            <article className="z-50 mx-5 h-96">
+              <h1 className="text-3xl lg:text-4xl xl:text-5xl font-bold mt-4">
                 {cityWeather?.city?.name} ,
-                <small className="text-base">
+                <span className="text-base">
                   {cityWeather?.city?.country}
-                </small>
+                </span>
               </h1>
-              <p className="text-base mt-1 text-slate-200">
+              <p className="text-sm mt-1 text-slate-200">
                 {getCurrentDate()}
               </p>
               <p className="capitalize mt-2 font-semibold">
                 {cityWeather.list &&
                   cityWeather?.list[0].weather[0]?.description}
               </p>
-              <article className="flex justify-evenly align-center font-medium">
-                <div className="grid place-content-center gap-2 text-base text-left pt-7">
+              <div className="flex justify-evenly align-center font-medium container mx-auto">
+                <div className="grid place-content-center gap-2 text-sm lg:text-base text-left pt-7">
                   <p>
                     Hissedilen Sıcaklık:
                     <span className="ms-1">
@@ -125,24 +125,24 @@ function SearchedCity() {
                 </div>
                 <div className="grid place-content-center">
                   <img
-                    className="mx-auto"
+                    className="mx-auto w-28 md:w-36 lg:w-40 xl:w-44 2xl:w-48"
                     src={`https://openweathermap.org/img/wn/${cityWeather?.list[0]?.weather[0].icon}@4x.png`}
                     alt="weather icons"
                   />
-                  <h1 className="text-4xl mb-8 font-bold">
+                  <h1 className="text-3xl lg:text-4xl xl:text-4xl 2xl:text-4xl mb-8 font-bold">
                     {Math.round(cityWeather?.list[0]?.main?.temp)} °C
                   </h1>
                 </div>
-              </article>
-              <div className="w-full relative">
+              </div>
+              <div className="w-full h-10 relative">
                 <button
-                  className="absolute right-10 bottom-0 w-10 text-base text-slate-200 hover:text-blue-600 hover:underline duration-500"
+                  className="absolute right-5 bottom-0 md:bottom-4 lg:bottom-10 xl:bottom-16 2xl:bottom-20 w-20 text-base text-slate-200 hover:text-blue-600 hover:underline duration-500"
                   onClick={() => addFavCity(cityWeather)}
                 >
                   Ekle
                 </button>
               </div>
-            </div>
+            </article>
           </>
         ) : (
           <FavCities />

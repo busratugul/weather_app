@@ -5,17 +5,17 @@ import WeatherContext from '../context/WeatherContext'
 function Location({cityWeather}) {
   const { txtColor, clickedLocationBtn, locationOpen } = useContext(WeatherContext)
   return (
-    <article className="w-1/4 text-3xl grid place-items-center">
+    <>
       <button
         title={locationOpen ?"Konumu Devre Dışı Bırak" :"Konumu Aktif Et"}
         className={`${
           locationOpen ? 'text-blue-500' : txtColor ? txtColor : 'text-slate-300'
-        } hover:text-blue-500 duration-300 w-20 cursor-pointer`}
+        } hover:text-blue-500 duration-500 cursor-pointer w-20`}
         onClick={() => clickedLocationBtn(cityWeather?.city?.name)}
       >
-        <MdLocationOn className='mx-auto' />
+        <MdLocationOn className='mx-auto text-2xl lg:text-3xl 2xl:text-4xl' />
       </button>
-    </article>
+    </>
   )
 }
 
