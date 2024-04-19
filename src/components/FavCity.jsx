@@ -1,4 +1,4 @@
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 import WeatherContext from '../context/WeatherContext'
 import DeleteListItemBtn from './DeleteListItemBtn'
 
@@ -6,9 +6,33 @@ function FavCity({ city }) {
   const {
     storedValue,
     favOpen,
-    setIsDeleteOpen,
-    isDeleteOpen,
+    setFavOpen,
+    setLoading,
+    setNotification,
+    defaultCityWeather,
+    removeStoredValue,
   } = useContext(WeatherContext)
+
+  const [isDeleteOpen, setIsDeleteOpen] = useState(false)
+
+  //DeleteListItemBtn componentinde favori şehiri silme butonu
+  function removeFavCity(city) {
+    setNotification({
+      type: 'success',
+      content: `${city.name} Favori Listenizden Kaldırıldı.`,
+      visible: true,
+    })
+    removeStoredValue(city)
+  }
+
+  //DeleteListItemBtn componentinde favori şehiri detaylandırma butonu
+  function detailFavCity(city) {
+    setLoading(false)
+    defaultCityWeather(city)
+    setFavOpen(false)
+    setLoading(true)
+    setIsDeleteOpen(false)
+  }
 
   //eğer listelenecek bir favori listesi varsa ve favOpen true ise
   if (storedValue.length > 0 && favOpen) {
@@ -48,7 +72,12 @@ function FavCity({ city }) {
             <span className="ms-5">D: {Math.round(city.minTemp)}</span>
           </p>
         </div>
-        <DeleteListItemBtn isDeleteOpen={isDeleteOpen} city={city} />
+        <DeleteListItemBtn
+          isDeleteOpen={isDeleteOpen}
+          city={city}
+          removeFavCity={removeFavCity}
+          detailFavCity={detailFavCity}
+        />
       </li>
     )
   }

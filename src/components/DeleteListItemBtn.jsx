@@ -1,12 +1,9 @@
-import { useContext } from 'react'
 import { FaTimes } from 'react-icons/fa'
 import { FaEye } from 'react-icons/fa'
-import WeatherContext from '../context/WeatherContext'
 
-function DeleteListItemBtn({ city }) {
-  const { removeFavCity, detailFavCity, isDeleteOpen } = useContext(WeatherContext)
+function DeleteListItemBtn({ city, removeFavCity, detailFavCity, isDeleteOpen }) {
 
-//favori şehirleri silme ve detaylandırma butonu 
+  //favori şehirleri silme ve detaylandırma butonu
   if (isDeleteOpen) {
     return (
       <>

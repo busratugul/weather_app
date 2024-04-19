@@ -26,7 +26,6 @@ export const WeatherProvider = ({ children }) => {
     content: '',
     visible: false,
   })
-  const [isDeleteOpen, setIsDeleteOpen] = useState(false)
 
   const { storedValue, addStoredValue, removeStoredValue, updateStoredValue } =
     useLocalStorage()
@@ -169,24 +168,6 @@ export const WeatherProvider = ({ children }) => {
     }
   }
 
-  //DeleteListItemBtn componentinde favori şehiri silme butonu
-  function removeFavCity(city) {
-    setNotification({
-      type: 'success',
-      content: `${city.name} Favori Listenizden Kaldırıldı.`,
-      visible: true,
-    })
-    removeStoredValue(city)
-  }
-
-  //DeleteListItemBtn componentinde favori şehiri detaylandırma butonu
-  function detailFavCity(city) {
-    setLoading(false)
-    defaultCityWeather(city)
-    setFavOpen(false)
-    setLoading(true)
-    setIsDeleteOpen(false)
-  }
 
   /* ---------------- PROPS ----------------- */
   const initialStates = {
@@ -222,10 +203,6 @@ export const WeatherProvider = ({ children }) => {
     removeStoredValue,
     updateStoredValue,
     storedValue,
-    detailFavCity,
-    removeFavCity,
-    isDeleteOpen,
-    setIsDeleteOpen,
   }
 
   return (

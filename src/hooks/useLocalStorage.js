@@ -1,6 +1,5 @@
-import { useContext, useState } from 'react'
+import { useState } from 'react'
 import gettingCityWeather from '../data/weather_api'
-import WeatherContext from '../context/WeatherContext'
 
 function useLocalStorage() {
   const key = 'favoriteCities'
