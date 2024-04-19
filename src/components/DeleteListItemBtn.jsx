@@ -1,8 +1,12 @@
 import { FaTimes } from 'react-icons/fa'
 import { FaEye } from 'react-icons/fa'
 
-function DeleteListItemBtn({ city, removeFavCity, detailFavCity, isDeleteOpen }) {
-
+function DeleteListItemBtn({
+  city,
+  removeFavCity,
+  detailFavCity,
+  isDeleteOpen,
+}) {
   //favori şehirleri silme ve detaylandırma butonu
   if (isDeleteOpen) {
     return (

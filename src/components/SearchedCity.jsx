@@ -15,11 +15,11 @@ function SearchedCity() {
     permission,
     favOpen,
     addStoredValue,
-    setNotification
+    setNotification,
   } = useContext(WeatherContext)
 
   useEffect(() => {
-    (async () => {
+    ;(async () => {
       if (permission) {
         //Eğer konuma izin verilirse
         return await getLocation()
@@ -33,27 +33,27 @@ function SearchedCity() {
   //Ekle butonuna basılınca favori şehirlere eklenecek
   function addFavCity(cityWeather) {
     const result = addStoredValue(cityWeather)
-  
+
     if (result && result.error) {
       setNotification({
-        type: "error",
+        type: 'error',
         content: result.error,
-        visible: true
-      });
-      return;
+        visible: true,
+      })
+      return
     }
-  
+
     setNotification({
-      type: "success",
+      type: 'success',
       content: `${cityWeather.city?.name} Favori Listenize Eklendi.`,
-      visible: true
+      visible: true,
     })
   }
 
   //Yüklenme tamamlandıysa ve hata yoksa ve aranan şehir geçerli ise
   if (cityWeather && !loading) {
     return (
-      <section className="max-h-96 text-center py-4 grid gap-2 mt-5 relative fade-in text-zinc-50 cursor-pointer">
+      <section className="text-center py-4 grid gap-2 mt-10 relative fade-in text-zinc-50 cursor-pointer">
         {!favOpen ? (
           <>
             <div
@@ -63,15 +63,11 @@ function SearchedCity() {
               }}
             ></div>
             <article className="z-50 mx-5 h-96">
-              <h1 className="text-3xl lg:text-4xl xl:text-5xl font-bold mt-4">
+              <h1 className="text-3xl lg:text-4xl xl:text-5xl font-bold">
                 {cityWeather?.city?.name} ,
-                <span className="text-base">
-                  {cityWeather?.city?.country}
-                </span>
+                <span className="text-base">{cityWeather?.city?.country}</span>
               </h1>
-              <p className="text-sm mt-1 text-slate-200">
-                {getCurrentDate()}
-              </p>
+              <p className="text-sm mt-1 text-slate-200">{getCurrentDate()}</p>
               <p className="capitalize mt-2 font-semibold">
                 {cityWeather.list &&
                   cityWeather?.list[0].weather[0]?.description}
@@ -136,7 +132,7 @@ function SearchedCity() {
               </div>
               <div className="w-full h-10 relative">
                 <button
-                  className="absolute right-5 bottom-0 md:bottom-4 lg:bottom-10 xl:bottom-16 2xl:bottom-20 w-20 text-base text-slate-200 hover:text-blue-600 hover:underline duration-500"
+                  className="absolute right-5 -bottom-7 md:bottom-4 lg:bottom-10 xl:bottom-16 2xl:bottom-20 w-20 text-base text-slate-200 hover:text-blue-600 hover:underline duration-500"
                   onClick={() => addFavCity(cityWeather)}
                 >
                   Ekle

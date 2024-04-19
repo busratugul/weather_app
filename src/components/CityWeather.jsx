@@ -31,7 +31,10 @@ function CityWeather() {
         >
           Hava durumu bilgisi için bir şehir girin.
         </p>
-        <form onSubmit={(e) => handleSubmit(e)} className='max-w-96 min-w-36 mx-auto mt-1'>
+        <form
+          onSubmit={(e) => handleSubmit(e)}
+          className="max-w-96 min-w-36 mx-auto mt-1"
+        >
           <input
             type="text"
             placeholder="Şehir Ara"
@@ -43,12 +46,16 @@ function CityWeather() {
           {error !== '' && (
             //Geçersiz bir şehir arandıysa
             <div>
-              <p className="text-red-500 mt-2 text-xs lg:text-sm text-center">{error}</p>
+              <p className="text-red-500 mt-2 text-xs lg:text-sm text-center">
+                {error}
+              </p>
             </div>
           )}
         </form>
       </label>
-      <div className='w-1/4 grid place-items-center'><Favorites /></div>
+      <div className="w-1/4 grid place-items-center">
+        <Favorites />
+      </div>
     </section>
   )
 }

@@ -69,7 +69,9 @@ function FavCity({ city }) {
           </p>
           <p className=" text-slate-400 flex justify-between text-xs sm:text-base">
             <span>Y: {Math.round(city.maxTemp)}</span>
-            <span className="ms-2 lg:ms-5 xl:ms-5 2xl:ms-5">D: {Math.round(city.minTemp)}</span>
+            <span className="ms-2 lg:ms-5 xl:ms-5 2xl:ms-5">
+              D: {Math.round(city.minTemp)}
+            </span>
           </p>
         </div>
         <DeleteListItemBtn

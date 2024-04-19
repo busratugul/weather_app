@@ -170,7 +170,6 @@ export const WeatherProvider = ({ children }) => {
     }
   }
 
-
   /* ---------------- PROPS ----------------- */
   const initialStates = {
     searchedCity,
