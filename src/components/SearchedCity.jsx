@@ -136,7 +136,7 @@ function SearchedCity() {
               </article>
               <div className="w-full relative">
                 <button
-                  className="absolute right-10 bottom-0 text-sm text-slate-200 hover:underline"
+                  className="absolute right-10 bottom-0 w-10 text-base text-slate-200 hover:text-blue-600 hover:underline duration-500"
                   onClick={() => addFavCity(cityWeather)}
                 >
                   Ekle

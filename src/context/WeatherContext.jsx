@@ -147,7 +147,7 @@ export const WeatherProvider = ({ children }) => {
   }
 
   //KONUM AL BUTONUNA TIKLANIRSA KONUMU AKTİF ET
-  function clickedLocationBtn() {
+  function clickedLocationBtn(city) {
     if (!locationOpen) {
       setLoading(false)
       setPermission(true)
@@ -164,6 +164,8 @@ export const WeatherProvider = ({ children }) => {
         content: 'Konum Paylaşımı Devre Dışı Bırakıldı.',
         visible: 'true',
       })
+      setFavOpen(false)
+      defaultCityWeather(city)
       setLocationOpen(false)
     }
   }

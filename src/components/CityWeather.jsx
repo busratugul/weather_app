@@ -1,10 +1,10 @@
-import { useContext, useEffect, useRef } from 'react'
+import { useContext, useEffect } from 'react'
 import WeatherContext from '../context/WeatherContext'
 import Location from './Location'
 import Favorites from './Favorites'
 
 function CityWeather() {
-  const { inputRef, searchedCity, setSearchedCity, handleSubmit, error,txtColor } = useContext(WeatherContext)
+  const { inputRef, searchedCity, setSearchedCity, handleSubmit, error,txtColor, cityWeather } = useContext(WeatherContext)
 
   useEffect(() => {
     inputRef.current.focus()
@@ -12,7 +12,7 @@ function CityWeather() {
 
   return (
     <section className="flex items-end w-full">
-      <Location />
+      <Location cityWeather={cityWeather}/>
       <article className="flex flex-col flex-grow items-center mx-auto">
         <label className='w-full'>
         <p className={`text-sm mb-2 text-center ${txtColor ? txtColor : 'text-slate-300'}`}>
