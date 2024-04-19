@@ -22,17 +22,14 @@ export const WeatherProvider = ({ children }) => {
   const [favOpen, setFavOpen] = useState(false)
   const [locationOpen, setLocationOpen] = useState(false)
   const [notification, setNotification] = useState({
-    type: "",
+    type: '',
     content: '',
     visible: false,
   })
+  const [isDeleteOpen, setIsDeleteOpen] = useState(false)
 
-  const {
-    storedValue,
-    addStoredValue,
-    removeStoredValue,
-    updateStoredValue
-  } = useLocalStorage()
+  const { storedValue, addStoredValue, removeStoredValue, updateStoredValue } =
+    useLocalStorage()
 
   const inputRef = useRef(null)
 
@@ -118,7 +115,7 @@ export const WeatherProvider = ({ children }) => {
     if (permission) {
       //konuma izin verilmiş ise konumu al
       setNotification({
-        type:"success",
+        type: 'success',
         content: 'Konum Paylaşımı Aktif Edildi.',
         visible: 'true',
       })
@@ -164,12 +161,31 @@ export const WeatherProvider = ({ children }) => {
       setLoading(true)
     } else {
       setNotification({
-        type:"success",
+        type: 'success',
         content: 'Konum Paylaşımı Devre Dışı Bırakıldı.',
         visible: 'true',
       })
       setLocationOpen(false)
     }
+  }
+
+  //DeleteListItemBtn componentinde favori şehiri silme butonu
+  function removeFavCity(city) {
+    setNotification({
+      type: 'success',
+      content: `${city.name} Favori Listenizden Kaldırıldı.`,
+      visible: true,
+    })
+    removeStoredValue(city)
+  }
+
+  //DeleteListItemBtn componentinde favori şehiri detaylandırma butonu
+  function detailFavCity(city) {
+    setLoading(false)
+    defaultCityWeather(city)
+    setFavOpen(false)
+    setLoading(true)
+    setIsDeleteOpen(false)
   }
 
   /* ---------------- PROPS ----------------- */
@@ -206,6 +222,10 @@ export const WeatherProvider = ({ children }) => {
     removeStoredValue,
     updateStoredValue,
     storedValue,
+    detailFavCity,
+    removeFavCity,
+    isDeleteOpen,
+    setIsDeleteOpen,
   }
 
   return (
