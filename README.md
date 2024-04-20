@@ -26,13 +26,13 @@
  ``` git clone https://github.com/busratugul/weather_app.git ```
 
 **Proje dizinine gidin :**
-```cd react-proje-adi```
+```cd weather_app```
 
 **Proje Bağımlılıklarını Yükleyin:**
 ```npm install```
 
 **Artık projeyi çalıştırabilirsiniz :**
-```npm test```
+```npm start```
 
 ## 💎 Projeyi Buradan Görüntüleyebilirsiniz
  - [Live Demo](https://busratugul-weather-app.netlify.app/)
