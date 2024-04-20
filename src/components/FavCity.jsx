@@ -38,7 +38,7 @@ function FavCity({ city }) {
   if (storedValue.length > 0 && favOpen) {
     return (
       <li
-        className={`relative w-full h-24 border border-slate-700 rounded-md flex justify-between items-center mb-5 shadow-md text-base lg:text-lg 2xl:text-xl shadow-gray-900 px-12 lg:px-16 py-3 hover:bg-slate-800 ${
+        className={`relative w-5/5 md:w-3/5 mx-auto h-16 md:h-20 border border-slate-700 rounded-md flex justify-between items-center mb-5 shadow-md text-base lg:text-lg 2xl:text-xl shadow-gray-900 px-12 lg:px-16 py-3 hover:bg-slate-800 ${
           isDeleteOpen ? 'bg-slate-800 opacity-50' : 'bg-slate-700'
         }`}
         onClick={() => setIsDeleteOpen(!isDeleteOpen)}

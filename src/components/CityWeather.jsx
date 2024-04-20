@@ -19,7 +19,7 @@ function CityWeather() {
   }, [searchedCity])
 
   return (
-    <section className="w-full mt-3 flex">
+    <section className="w-full mt-3 flex pb-4 border-b border-gray-700">
       <div className="w-1/4 grid place-items-center">
         <Location cityWeather={cityWeather} />
       </div>

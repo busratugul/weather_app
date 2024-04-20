@@ -15,9 +15,9 @@ function DailyWeatherDetail() {
   //Gerekli veriler alındıktan sonra detaylandır
   if (cityWeather && !loading && !favOpen) {
     return (
-      <section className="w-full absolute bottom-2 h-auto">
+      <section>
         <h1
-          className={`mt-5 mb-3 text-center tracking-wider text-base font-semibold ${
+          className={`mt-5 mb-1 text-center tracking-wider text-base font-semibold ${
             txtColor ? txtColor : 'text-slate-300'
           }`}
         >

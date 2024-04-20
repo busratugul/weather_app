@@ -32,7 +32,7 @@ function FavCities() {
 
   if (favOpen) {
     return (
-      <section className="w-full min-h-80 fade-in text-xl lg:text-2xl border-t border-slate-600">
+      <section className="w-full min-h-80 fade-in text-xl lg:text-2xl">
         {storedValue.length > 0 ? (
           <>
             <h1
@@ -50,7 +50,7 @@ function FavCities() {
           </>
         ) : (
           <div className="w-full h-full grid place-items-center">
-            <p className="text-gray-400">Favori Şehriniz Bulunmamaktadır.</p>
+            <p className="text-gray-800">Favori Şehriniz Bulunmamaktadır.</p>
           </div>
         )}
       </section>

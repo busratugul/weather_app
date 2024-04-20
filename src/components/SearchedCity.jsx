@@ -2,6 +2,7 @@ import { useContext, useEffect } from 'react'
 import WeatherContext from '../context/WeatherContext'
 import Loading from './Loading'
 import FavCities from './FavCities'
+import DailyWeatherDetail from './DailyWeatherDetail'
 
 function SearchedCity() {
   const {
@@ -53,17 +54,16 @@ function SearchedCity() {
   //Yüklenme tamamlandıysa ve hata yoksa ve aranan şehir geçerli ise
   if (cityWeather && !loading) {
     return (
-      <section className="text-center py-4 grid gap-2 mt-10 relative fade-in text-zinc-50 cursor-pointer h-4/5">
+      <section className="flex flex-col items-center justify-start text-center relative fade-in text-zinc-50 cursor-pointer h-5/6">
         {!favOpen ? (
           <>
             <div
-              className="absolute bg-cover w-full h-full bg-center bg-no-repeat blur-sm -z-1 opacity-50"
+              className="absolute my-auto bg-cover w-full h-full bg-center bg-no-repeat blur-sm -z-1 opacity-50"
               style={{
                 backgroundImage: bgImgURL ? `url(${bgImgURL})` : 'none',
               }}
             ></div>
-            <div className="z-50 mx-5 h-auto flex flex-col items-center">
-              <div className='h-1/5 flex flex-col items-center justify-center'>
+              <div className='z-50 h-1/4 p-5'>
                 <h1 className="text-xl md:text-2xl lg:text-4xl xl:text-5xl font-bold">
                   {cityWeather?.city?.name} ,
                   <span className="text-base">
@@ -78,8 +78,7 @@ function SearchedCity() {
                     cityWeather?.list[0].weather[0]?.description}
                 </p>
               </div>
-
-              <div className="w-full h-2/5 flex justify-evenly items-center font-medium relative">
+              <div className="w-full h-2/4 flex justify-evenly items-start font-medium relative">
                 <div className="grid gap-1 md:gap-2 text-xs md:text-sm lg:text-base text-left">
                   <p>
                     Hissedilen Sıcaklık:
@@ -137,11 +136,15 @@ function SearchedCity() {
                   </h1>
                 </div>
               </div>
-            </div>
+              <div className='w-full relative'>
+                <button className='absolute right-2 md:right-10 bottom-14 md:bottom-0 p-6 text-base text-slate-200 hover:text-blue-600 hover:underline duration-500 z-50' onClick={() => addFavCity(cityWeather)}>Ekle</button>
+                </div>
+              
           </>
         ) : (
           <FavCities />
         )}
+        <div className='w-full absolute bottom-10 md:bottom-0 h-auto py-2'><DailyWeatherDetail/></div>
       </section>
     )
   }
