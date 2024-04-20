@@ -11,7 +11,7 @@ function App() {
   
   return (
     <main
-      className={`h-screen box-border text-zinc-50 font-poppins overflow-y-hidden py-5 ${bgColor}`} 
+      className={`h-screen w-screen box-border text-zinc-50 font-poppins overflow-y-hidden py-5 ${bgColor}`} 
     >
       <nav className="w-full">
         <h1 className="text-center text-base text-blue-600 tracking-wider mt-5">

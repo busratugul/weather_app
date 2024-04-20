@@ -19,7 +19,7 @@ function SearchedCity() {
   } = useContext(WeatherContext)
 
   useEffect(() => {
-    ;(async () => {
+    (async () => {
       if (permission) {
         //Eğer konuma izin verilirse
         return await getLocation()
@@ -53,7 +53,7 @@ function SearchedCity() {
   //Yüklenme tamamlandıysa ve hata yoksa ve aranan şehir geçerli ise
   if (cityWeather && !loading) {
     return (
-      <section className="text-center py-4 grid gap-2 mt-10 relative fade-in text-zinc-50 cursor-pointer">
+      <section className="text-center py-4 grid gap-2 mt-10 relative fade-in text-zinc-50 cursor-pointer h-4/5">
         {!favOpen ? (
           <>
             <div
@@ -62,18 +62,25 @@ function SearchedCity() {
                 backgroundImage: bgImgURL ? `url(${bgImgURL})` : 'none',
               }}
             ></div>
-            <article className="z-50 mx-5 h-96">
-              <h1 className="text-3xl lg:text-4xl xl:text-5xl font-bold">
-                {cityWeather?.city?.name} ,
-                <span className="text-base">{cityWeather?.city?.country}</span>
-              </h1>
-              <p className="text-sm mt-1 text-slate-200">{getCurrentDate()}</p>
-              <p className="capitalize mt-2 font-semibold">
-                {cityWeather.list &&
-                  cityWeather?.list[0].weather[0]?.description}
-              </p>
-              <div className="flex justify-evenly align-center font-medium container mx-auto">
-                <div className="grid place-content-center gap-2 text-sm lg:text-base text-left pt-7">
+            <div className="z-50 mx-5 h-auto flex flex-col items-center">
+              <div className='h-1/5 flex flex-col items-center justify-center'>
+                <h1 className="text-xl md:text-2xl lg:text-4xl xl:text-5xl font-bold">
+                  {cityWeather?.city?.name} ,
+                  <span className="text-base">
+                    {cityWeather?.city?.country}
+                  </span>
+                </h1>
+                <p className="text-xs md:text-sm mt-1 text-slate-200">
+                  {getCurrentDate()}
+                </p>
+                <p className="capitalize mt-2 font-semibold">
+                  {cityWeather.list &&
+                    cityWeather?.list[0].weather[0]?.description}
+                </p>
+              </div>
+
+              <div className="w-full h-2/5 flex justify-evenly items-center font-medium relative">
+                <div className="grid gap-1 md:gap-2 text-xs md:text-sm lg:text-base text-left">
                   <p>
                     Hissedilen Sıcaklık:
                     <span className="ms-1">
@@ -119,26 +126,18 @@ function SearchedCity() {
                     </span>
                   </p>
                 </div>
-                <div className="grid place-content-center">
+                <div>
                   <img
                     className="mx-auto w-28 md:w-36 lg:w-40 xl:w-44 2xl:w-48"
                     src={`https://openweathermap.org/img/wn/${cityWeather?.list[0]?.weather[0].icon}@4x.png`}
                     alt="weather icons"
                   />
-                  <h1 className="text-3xl lg:text-4xl xl:text-4xl 2xl:text-4xl mb-8 font-bold">
+                  <h1 className="text-xl md:text-2xl lg:text-4xl xl:text-4xl 2xl:text-4xl mb-8 font-bold">
                     {Math.round(cityWeather?.list[0]?.main?.temp)} °C
                   </h1>
                 </div>
               </div>
-              <div className="w-full h-10 relative">
-                <button
-                  className="absolute right-5 -bottom-7 md:bottom-4 lg:bottom-10 xl:bottom-16 2xl:bottom-20 w-20 text-base text-slate-200 hover:text-blue-600 hover:underline duration-500"
-                  onClick={() => addFavCity(cityWeather)}
-                >
-                  Ekle
-                </button>
-              </div>
-            </article>
+            </div>
           </>
         ) : (
           <FavCities />
