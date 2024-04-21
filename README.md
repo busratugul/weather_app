@@ -10,12 +10,12 @@
 + Uygulama kullanıcı dostu arayüz tasarımı, duyarlılık(responsive), performans odaklı geliştirilmiştir.
 
 <p align="center">
-  <img src="screens/main.png" alt="Açıklama 1" width="300" height="300" style="margin-right:10px;" />
-  <img src="screens/favcitylist.png" alt="Açıklama 2" width="300" height="300" />
+  <img src="images/main.png" alt="Açıklama 1" width="300" height="300" style="margin-right:10px;" />
+  <img src="images/favcitylist.png" alt="Açıklama 2" width="300" height="300" />
 </p>
 <p align="center">
-  <img src="screens/loading.png" alt="Açıklama 1" width="300" height="300" style="margin-right:10px;" />
-  <img src="screens/location.png" alt="Açıklama 2" width="300" height="300" />
+  <img src="images/loading.png" alt="Açıklama 1" width="300" height="300" style="margin-right:10px;" />
+  <img src="images/location.png" alt="Açıklama 2" width="300" height="300" />
 </p>
   
 ## 💎 Projeyi Buradan Görüntüleyebilirsiniz
